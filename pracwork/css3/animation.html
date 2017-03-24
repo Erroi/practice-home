@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    .container {
+        perspective: 1000px;
+    }
+    
+    .piece-box {
+        width: 200px;
+        height: 200px;
+        margin: 300px auto;
+        position: relative;
+        perspective-origin: 50% 50%;
+        transform-style: preserve-3d;
+        animation: pieceRotate 5s;
+    }
+    .piece-box2{
+    	transform-style: preserve-3d;
+    	animation: boxRotate 5s 10s infinite;
+    }
+    
+    .piece {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        opacity: 0.5;
+    }
+    
+    .piece-1 {
+        background-color: #FF6666;
+        transform: rotateY(0deg) translateZ(173.2px);
+        animation: piece1Rotate 5s 5s;
+        animation-fill-mode: forwards;
+    }
+    
+    .piece-2 {
+        background-color: #006699;
+        transform: rotateY(60deg) translateZ(173.2px);
+        animation: piece2Rotate 5s 5s;
+        animation-fill-mode: forwards;
+    }
+    
+    .piece-3 {
+        background-color: #009999;
+        transform: rotateY(120deg) translateZ(173.2px);
+        animation: piece3Rotate 5s 5s;
+        animation-fill-mode: forwards;
+    }
+    
+    .piece-4 {
+        background-color: #FF0033;
+        transform: rotateY(180deg) translateZ(173.2px);
+        animation: piece4Rotate 5s 5s;
+        animation-fill-mode: forwards;
+    }
+    
+    .piece-5 {
+        background-color: #FF6600;
+        transform: rotateY(240deg) translateZ(173.2px);
+        animation: piece5Rotate 5s 5s;
+        animation-fill-mode: forwards;
+    }
+    
+    .piece-6 {
+        background-color: #FFFF00;
+        transform: rotateY(300deg) translateZ(173.2px);
+        animation: piece6Rotate 5s 5s;
+        animation-fill-mode: forwards;
+    }
+    
+    @keyframes pieceRotate {
+        0% {
+            transform: rotateY(0deg);
+        }
+        100% {
+            transform: rotateY(360deg);
+        }
+    }
+    
+    @keyframes piece1Rotate {
+        0% {
+            transform: rotateY(0deg) translateZ(173.2px);
+        }
+        100% {
+            transform: rotateY(0deg) translateZ(100px);
+        }
+    }
+    
+    @keyframes piece2Rotate {
+        0% {
+            transform: rotateY(60deg) translateZ(173.2px);
+        }
+        100% {
+            transform: rotateY(0deg) translateZ(-100px);
+        }
+    }
+    
+    @keyframes piece3Rotate {
+        0% {
+            transform: rotateY(120deg) translateZ(173.2px);
+        }
+        100% {
+            transform: translateX(-100px) rotateY(90deg);     /*先移动在旋转*/
+        }
+    }
+    
+    @keyframes piece4Rotate {
+        0% {
+            transform: rotateY(180deg) translateZ(173.2px);
+        }
+        100% {
+            transform:translateX(100px) rotateY(90deg) ;
+        }
+    }
+    
+    @keyframes piece5Rotate {
+        0% {
+            transform: rotateY(240deg) translateZ(173.2px);
+        }
+        100% {
+            transform:translateY(-100px) rotateX(90deg) ;
+        }
+    }
+    
+    @keyframes piece6Rotate {
+        0% {
+            transform: rotateY(300deg) translateZ(173.2px);
+        }
+        100% {
+            transform: translateY(100px) rotateX(90deg) ;
+        }
+    }
+
+    /*正方体旋转动画*/
+    @keyframes boxRotate{
+    	0%{
+    		transform: rotateX(0deg) rotateY(0deg);
+    	}
+    	100%{
+    		transform: rotateX(360deg) rotateY(360deg);
+    	}
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="piece-box">
+        <div class="piece-box2">
+            <div class="piece piece-1"></div>
+            <div class="piece piece-2"></div>
+            <div class="piece piece-3"></div>
+            <div class="piece piece-4"></div>
+            <div class="piece piece-5"></div>
+            <div class="piece piece-6"></div>
+        </div>
+        </div>
+    </div>
+</body>
+
+</html>

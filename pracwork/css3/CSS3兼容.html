@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html">
+    <title>Document</title>
+    <!-[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]>
+    <style type="text/css">
+    .box {
+        width: 50px;
+        height: 25px;
+        box-sizing: border-box;
+        /*border-box=border+padding+content*/
+        background: rgb(167, 255, 109);
+        /*	-moz-border-radius:15px;
+			-webkit-border-radius:15px;*/
+        border-radius: 50px/25px;
+        /*-moz-box-shadow:10px 10px 20px #000;
+			-webkit-box-shadow:10px 10px 20px #000;
+			box-shadow: 10px 10px 20px #000;*/
+        /*behavior:url(ie-css3.htc); */
+        /*ie对css3的支持*/
+    }
+    
+    .trim {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #CCC;
+        border-radius: 50%;
+        position: relative;
+    }
+    
+    .trim::after {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 60px;
+        border-radius: 5px;
+        background: #CCC;
+        position: absolute;
+        right: -22px;
+        top: 38px;
+        transform: rotate(-45deg);
+    }
+    
+    #title {
+        position: relative;
+    }
+    
+    #title:hover::after {
+        content: attr(data-title);
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 3px;
+        border-radius: 3px;
+        position: absolute;
+        top: -50px;
+        left: -30px;
+    }
+    
+    #gradient {
+        width: 200px;
+        height: 50px;
+        background: linear-gradient(to right, red, yellow, black, green);
+        /*linear-gradient线性渐变*/
+    }
+    
+    #chrome {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        box-shadow: 0 0 4px #999, 0 0 2px #ddd inset;
+        background: radial-gradient(circle, #4FACF5 0, #2196F3 28%, transparent 28%), radial-gradient(circle, #fff 33%, transparent 33%), linear-gradient(-50deg, #FFEB3B 34%, transparent 34%), linear-gradient(60deg, #4CAF50 33%, transparent 33%), linear-gradient(180deg, #FF756B 0, #F44336 30%, transparent 30%), linear-gradient(-120deg, #FFEB3B 40%, transparent 40%), linear-gradient(-60deg, #FFEB3B 30%, transparent 30%), linear-gradient(0deg, #4CAF50 45%, transparent 45%), linear-gradient(60deg, #4CAF50 30%, transparent 30%), linear-gradient(120deg, #F44336 50%, transparent 50%), linear-gradient(180deg, #F44336 30%, transparent 30%);
+    }
+    #resize{     /*同时拥有resize + overflow 调整*/
+    	width:200px;
+    	height:200px;
+    	border:2px solid;
+    	resize: both;    /*horizontal横向  vertical 纵向*/
+    	overflow: auto;  /*hidden*/
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="trim"></div>
+    <div id="title" data-title="hello world">hello...</div>
+    <div id="gradient"></div>
+    <div id="chrome"></div>
+    <div id="resize"></div>
+    <header>
+        this is header
+    </header>
+    <footer>
+        this is footer
+    </footer>
+</body>
+
+</html>

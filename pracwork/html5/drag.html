@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #square {
+        height: 200px;
+        width: 200px;
+        background-color: skyblue;
+        position: absolute;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="square"></div>
+    <script>
+    var square = document.getElementById('square');
+
+    square.addEventListener('mousedown', mousedownHandler);
+
+
+    function mousedownHandler(e) {
+        document.addEventListener('mouseup', mouseupHandler);
+        document.addEventListener('mousemove', mousemoveHandler);
+
+        var offsetX = e.offsetX;
+        var offsetY = e.offsetY;
+
+        function mousemoveHandler(event) {
+            square.style.top = event.pageY - offsetY + 'px';
+            square.style.left = event.pageX - offsetX + 'px';
+        }
+
+        function mouseupHandler(e) {
+            document.removeEventListener('mousemove', mousemoveHandler);
+        }
+    }
+    </script>
+</body>
+
+</html>

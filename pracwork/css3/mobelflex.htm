@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>flex</title>
+    <style type="text/css">
+    .wrapper {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .wrapper > *{
+    	padding:10px;
+    	flex:1 100%;     单占一行且宽度100%
+    }
+    @media all and (min-width:600px){
+    	.aside{
+    		flex:1 auto;
+    	}
+    }
+    @media all and (min-width:800px){
+    	.main{flex:3 0px;}     flex-grow|flex-shrink|flex-basis  默认0 1 auto      若想设在同一行：把本元素设置flex：int 0px
+    	.aside-1{order:1;}
+    	.main{order:2;}
+    	.aside-2{order:3;}    flex-grow:子项目所占剩余空间的比例，默认0
+    	.footer{order:4;}     order:设置伸缩项目在文档流中出现的顺序
+    }
+    
+    .header {
+        background: tomato;
+    }
+    
+    .footer {
+        background: lightgreen;
+    }
+    
+    .main {
+        text-align: left;
+        background: deepskyblue;
+    }
+    
+    .aside-1 {
+        background: gold;
+    }
+    
+    .aside-2 {
+        background: hotpink;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">Header</header>
+        <article class="main">
+            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+        </article>
+        <aside class="aside aside-1">Aside 13</aside>
+        <aside class="aside aside-2">Aside 2</aside>
+        <footer class="footer">Footer</footer>
+    </div>
+    <script src="debuggap.js" type="text/javascript"></script>
+</body>
+
+</html>

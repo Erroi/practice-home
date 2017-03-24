@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FIle</title>
+</head>
+<body>
+	<img id="result" src='' style="width:200px;height:200px;">
+	<input id="uploadfile" type="file" multiple onchange='loadImgFile()'></input>
+	<script type="text/javascript">
+		var result = document.getElementById('result');
+
+		var fileReader = new FileReader();
+
+		fileReader.onload = function(ofile){
+			result.src = ofile.target.result;
+			console.log(ofile.target.result)
+		}
+
+		function loadImgFile(){
+			var file = document.getElementById('uploadfile').files[0];
+			console.log(file)
+			fileReader.readAsDataURL(file);
+		}
+
+		//ajax
+		var xhr = XMLHttpRequest();
+		xhr.open("GET",url,true);
+		xhr.send();
+		xhr.onreadystatechange = function(){
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				alert(xhr.responseText);
+			}else{
+				alert(xhr.statusText)
+			}
+		}
+		xhr.timeout = 3000;
+		xhr.ontimeout = function(e){alert('请求超时')};
+
+		//FormData
+		var formdata = new FormData();
+		formdata.append('name','xxx');
+		xhr.open('POST',form.action);
+		xhr.send(formdata);
+
+		//file
+		var formdata = new FormData();
+		formdata.append('files[]',files[0]);
+		xhr.send(formdata)
+		
+	</script>
+</body>
+</html>

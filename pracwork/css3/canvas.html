@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <audio src="./1.mp3#t=10,40" controls autoplay></audio>
+    <canvas id="canvas" height="200" width="300">ggg</canvas>
+    <canvas id="canvas1" height="200" width="300">ggg</canvas>
+    <canvas id="canvas2" height="200" width="300">ggg</canvas>
+    <canvas id="canvas3" height="200" width="300">ggg</canvas>
+</body>
+<script type="text/javascript">
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+
+ctx.fillStyle = 'rgb(200,0,0)';
+ctx.fillRect(25, 25, 100, 100);
+ctx.strokeRect(50, 50, 50, 50);
+ctx.clearRect(80, 80, 30, 30);
+
+var canvas1 = document.getElementById('canvas1');
+var ctx1 = canvas1.getContext('2d');
+
+ctx1.beginPath();
+ctx1.moveTo(75, 50);
+ctx1.lineTo(100, 75);
+ctx1.lineTo(100, 25);
+ctx1.fill();
+
+
+var canvas2 = document.getElementById('canvas2');
+var ctx2 = canvas2.getContext('2d');
+
+ctx2.beginPath();
+ctx2.arc(75, 75, 50, 0, Math.PI * 2, true);
+ctx2.moveTo(110, 75);
+ctx2.arc(75, 75, 35, 0, Math.PI, false);   //顺时针
+ctx2.moveTo(65, 65);
+ctx2.arc(60, 65, 5, 0, Math.PI * 2, true); // 左眼
+ctx2.moveTo(95, 65);
+ctx2.arc(90, 65, 5, 0, Math.PI * 2, true); // 右眼
+ctx2.stroke();
+
+var canvas3 = document.getElementById('canvas3');
+var ctx3 = canvas3.getContext('2d');
+
+ctx3.font = '48px serif';
+ctx3.strokeText('hello world',10,50);
+</script>
+
+</html>

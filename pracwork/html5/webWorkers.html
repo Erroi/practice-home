@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>web worker</title>
+</head>
+<body>
+	<h1>从1到指定数据求和实例</h1>
+	<input type="text" name="" id="num">
+	<button onclick="calculate()">计算</button>
+	<script type="text/javascript">
+
+	var worker = new Worker(./cal.js);
+	worker.onmessage = function(event){
+		console.log('计算后得知'+event.data);
+	}
+		function calculate(){
+			var num = parseInt(document.getElementById(num).value,10);
+
+			worker.postMessage(num);
+
+		}
+	</script>
+</body>
+</html>

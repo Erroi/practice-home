@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>img-localstorage</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	var src="http://s4.cn.bing.net/th?id=OJ.0V5X0LDxCWBhtw&pid=MSNJVFeeds";
+	function set(key){
+		var img = document.createElement('img');
+		img.addEventListener('load',function(){
+			var imgCanvas = document.createElement('canvas');
+			imgContext = imgCanvas.getContest('2d');
+			imgCanvas.width = this.width;
+			imgCanvas.height = this.height;
+
+			imgContext.drawImage(this,0,0,this.width,this.height);
+			var imgAsDataURL = imgCanvas.toDataURL('image/png');
+
+			try{
+				localStorage.setItem(key,imgAsDataURL);
+			}
+			catch(e){
+				console.log('storage.failed:'+e);
+			}
+		},false);
+		img.src=src;
+	}
+	function get(key){
+		var srcStr = localStorage.getItem(key);
+		var imgObj = document.createElement('img');
+		imgObj.src = srcStr;
+		document.body.appendChild(imgObj);
+	}
+</script>
+</html>

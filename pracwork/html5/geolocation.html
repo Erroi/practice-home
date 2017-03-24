@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>geolocation</title>
+</head>
+<body>
+	<div id="output"></div>
+	<script type="text/javascript">
+		window.onload = function(){
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position){
+					var latitude = position.coords.latitude;
+					var longitude = position.coords.longitude;
+
+					drawMapCenteredAt(latitude,longitude);
+					document.getElementById('output').innerHtml = '纬度是：' + latitude + '经度势：' + longitude;
+				},function(error){
+					console.log(error.code);
+					console.log(error.message);
+				},{
+					enableHighAccuracy:true,
+					timeout:5000,
+					maximumAge:25000
+				});
+			}else{
+				alert('不支持geolocation')
+			}
+		}
+	</script>
+</body>
+</html>
