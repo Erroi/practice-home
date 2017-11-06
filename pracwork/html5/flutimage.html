@@ -12,12 +12,12 @@
 			max-width:100%;   /*相对于图片自身的宽度*/
 			height:auto;
 		}
-		#logo a{
+		#logo div{
 			display: block; 
 			width:100%;
-			height:40px;
+			height:auto;
 			text-indent: -555em;
-			background-image: url(../../17400942.jpeg);
+			background-image: url(./WechatIMG3.jpeg);
 			background-repeat: no-repeat;
 			background-size:100% 100%;       /*100% 100%宽高拉伸充满容器*/
 
@@ -26,9 +26,9 @@
 </head>
 <body>
 	<div class="containt">
-		<img src="../../17400942.jpeg" />
+		<img src="./WechatIMG3.jpeg" />
 	</div>
-	<h1 id="logo"><a href="/">wondercss</a></h1>
+	<div id="logo"><div>wondercss</div></div>
 	<p>液态图片</p>
 	<p>外面套一层容器（不能定义宽高）；设置image的最大宽度和自适应高度，会根据图片实际大小进行匹配窗口伸缩；当窗口小于图片实际宽度时，则图片宽度等于窗口宽度，高度自适应，实现图片等比缩放。</p>
 	<p>background-size:cover     等比扩展图片来填满元素</p>

@@ -13,12 +13,13 @@
 		var img = document.createElement('img');
 		img.addEventListener('load',function(){
 			var imgCanvas = document.createElement('canvas');
-			imgContext = imgCanvas.getContest('2d');
+			imgContext = imgCanvas.getContext('2d');
 			imgCanvas.width = this.width;
 			imgCanvas.height = this.height;
 
 			imgContext.drawImage(this,0,0,this.width,this.height);
 			var imgAsDataURL = imgCanvas.toDataURL('image/png');
+			console.log(imgAsDataURL)
 
 			try{
 				localStorage.setItem(key,imgAsDataURL);
@@ -34,6 +35,9 @@
 		var imgObj = document.createElement('img');
 		imgObj.src = srcStr;
 		document.body.appendChild(imgObj);
+		console.log(srcStr)
 	}
+	set();
+	get();
 </script>
 </html>

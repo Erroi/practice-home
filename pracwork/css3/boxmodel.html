@@ -5,10 +5,13 @@
 	<title>box</title>
 	<style type="text/css">
 		.center{
-			display: box;
-			box-orient:vertical;   朝向 vertical horizontal
-			box-align:center;  
-			box-pack:center;
+			display: -webkit-box;
+			-webkit-box-orient:vertical;   /*朝向 vertical horizontal*/    /*horizontal水平方向 与 -webkit-box-pack:center; 相互作用；       vertical 与 -webkit-box-align:center; 相互作用；*/
+			-webkit-box-align:center;  
+			-webkit-box-pack:center;      
+			width:500px;
+			height:500px;
+			border: 1px solid #ccc;
 		}
 		td{
 			border:1px solid #ccc;
@@ -16,7 +19,7 @@
 	</style>
 </head>
 <body>
-	<div class="center"><img src="##"></div>
+	<div class="center"><img src="http://az29176.vo.msecnd.net/videocontent/Navagio_Shipwreck_nimia_588263_FF_768_HD_ZH-CN1096993174.jpg" width="200" height="150"></div>
 	<table>
 		<tr>
 			<td rowspan="2" >ssss1</td>

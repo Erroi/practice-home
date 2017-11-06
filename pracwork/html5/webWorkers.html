@@ -10,16 +10,15 @@
 	<button onclick="calculate()">计算</button>
 	<script type="text/javascript">
 
-	var worker = new Worker(./cal.js);
+	var worker = new Worker('cal.js');
 	worker.onmessage = function(event){
 		console.log('计算后得知'+event.data);
 	}
-		function calculate(){
-			var num = parseInt(document.getElementById(num).value,10);
+	var calculate = function(){
+		var num = parseInt(document.getElementById('num').value,10);
 
-			worker.postMessage(num);
-
-		}
+		worker.postMessage(num);
+	}
 	</script>
 </body>
 </html>

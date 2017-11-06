@@ -42,6 +42,9 @@
 		formdata.append('name','xxx');
 		xhr.open('POST',form.action);
 		xhr.send(formdata);
+		
+		xhr.setRequestHeader('Content-type',"application/x-www-form-urlencoded");
+		xhr.send('name=yang&age=23');
 
 		//file
 		var formdata = new FormData();

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>video audio</title>
+</head>
+<body>
+	<div>
+		<video src="http://v2v.cc/~j/theora_testsuite/320x240.ogg">
+			your browser don't support HTML5
+		</video>
+		<audio src="1.mp3" controls autoplay loop>
+			your browser doesn't support HTML5
+		</audio>
+		<video controls>
+			<source src="foo.ogg" type="video/ogg">
+			<source src="foo.mp4" type="video/mp4">
+		</video>
+	</div>
+	<div>
+		<audio id="demo" src="audio.mp3"></audio>
+		<div>
+		  <button onclick="document.getElementById('demo').play()">播放声音</button>
+		  <button onclick="document.getElementById('demo').pause()">暂停声音</button>
+		  <button onclick="document.getElementById('demo').volume+=0.1">提高音量</button>
+		  <button onclick="document.getElementById('demo').volume-=0.1">降低音量</button>
+		</div>
+	</div>
+	<div>
+		<p>autoplay 自动播放；loop循环播放；controls：显示播放控制器；preload:缓冲播放文件（none，不缓冲；auto，缓冲；metadata,只缓冲文件元数据）</p>
+		<p>可以用 <source> 标签来指定多个文件，以为不同浏览器提供可支持的编码格式</p>
+	</div>
+	<script type="text/javascript">
+		var mediaElement = document.getElementById('mediaElementID');
+		mediaElement.seekable.start();  // 返回开始时间 (in seconds)
+		mediaElement.seekable.end();    // 返回结束时间 (in seconds)
+		mediaElement.currentTime = 122; // 设定在 122 seconds
+		mediaElement.played.end();      // 返回浏览器播放的秒数
+	</script>
+</body>
+</html>

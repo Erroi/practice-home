@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>webSocket</title>
+</head>
+<body>
+	<p>webSocket客户端和服务器端可以存在持久的连接，而且双方可以随时开始发送数据</p>
+	<script type="text/javascript">
+		// 1.调用  Websocket构造函数  既可以连接     ／／第二个参数是可选子协议 通过 connection.protocol 获取
+		var connection = new WebSocket('ws://url',['soap','xmpp']);
+
+		//when the connection is open , send some data to the server;
+		connection.onopen = function(){
+			connection.send('i am test');   // Send the message 'Ping' to the server
+		}
+
+		//
+		connection.onerror = function(error){
+			console.log('WebSocket Error ' + error);
+		}
+
+		// Log messages from the server   服务器也可能随时向我们发送讯息。只要发生这种情况，就会启动 onmessage 回调
+		connection.onmessage = function(e){
+			console.log('Sever:' + e.data);
+		}
+	</script>
+</body>
+</html>

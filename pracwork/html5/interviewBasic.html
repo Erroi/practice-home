@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>interviewBasic</title>
+</head>
+<body>
+	<div>
+		1.DOCTYPE作用？标准模式和兼容模式区别？
+		>>声明XML或html的文件类型，浏览器根据此来判断文档类型，决定使用何种协议来解析，及切换浏览器模式。
+			告诉浏览器的解析器用什么文档标准解析次文档，doctype不存在或格式不正确会导致文档以兼容模式呈现。
+		>>浏览器模式（浏览器厂商提供两种）：
+			标准模式：浏览器根据标准规范来渲染页面，排版和js运作。
+			混杂模式(兼容模式／怪异模式): 浏览器采取更加宽松、向后兼容的方式来渲染页面，模拟老式浏览器的行为，在此基础上兼容新的标准特性。
+		2.html5为什么只用doctype?
+		>>html5 不基于SGML(现时常用的超文本格式的最高层次标准),但是需要DOCTYPE来规范浏览器的行为。
+		3.行内元素：a  b  strong  span img input select
+			块状元素：div ul li p ol dl dd dt h1 h2 h3 h4 
+			空元素(没有内容的 HTML 元素被称为空元素。空元素是在开始标签中关闭的)：<br>  <hr>  <img src="" alt="">  <input type="text">  <link rel="stylesheet" href="">  <meta>  <area shape="" coords="" href="" alt=""> <col>
+		4.页面导入样式时，使用Link和@import有什么区别?
+		>>（1）link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;
+			（2）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;
+			（3）import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;
+		5.浏览器内核的理解？
+		>> (1)渲染引擎：负责取得网页的内容（html xml image),计算网页的显示方式。输出到显示器。
+			(2)js引擎：解析和执行javascript来实现网页的动态效果。
+		6.常见的浏览器内核有哪些？浏览器由 shell 和 内核 构成。
+			Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]
+			Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等。
+			Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]
+			Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]
+			EdgeHTML内核：Microsoft Edge。 
+		7.HTML5有哪些新特性、移除了哪些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
+		>>HTML5已经不是超文本格式的最高层次标准，主要增加的是关于图像，位置，存储，多任务等功能等增加
+		>>绘画canvas；用于媒介的audio,video元素。
+		>>本地离线存储localStorage长期存储数据，浏览器关闭后数据不丢失。sessionStorage的数据在浏览器关闭后数据不丢失。
+		>>语义化标签：artical,footer,header,nav,section;
+		>>表单控件:email,date,time,url,search
+		>>新的技术：websocket,webwork,geolocation;
+		8.html语义化的理解：
+		>>HTML语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析；
+			即使在没有样式CSS的情况下也能以一种文档格式显示，并且是容易阅读的；
+		9.HTML5的离线存储怎么使用？能否解释一下工作原理？
+		>>在用户没有连接英特网时，可以正常访问站点和应用；在用户连接英特网时，更新用户机器上的缓存文件。
+			`原理`：HTML5的离线存储是基于一个新建的 `.appcache` 文件的缓存机制（并非存储技术），通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储下来。之后当网络处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。
+			使用方法：
+			(1) 在页面头部像下面一样加入一个 manifest 的属性；
+			(2) 在 cache.manifest 文件里编写离线存储资源；
+			     CACHE MANIFEST
+			     #v0.11
+			     CACHE：
+			       js/app.js
+			       css/style.css
+			     NETWORK:
+			       resource/logo.png
+			     FALLBACK：
+			       / /offline.html
+			(3) 在离线状态时，操作 window.applicationCache 进行需求实现
+		10.浏览器是怎么对HTML5的离线存储资源进行管理和加载的?
+		>>在线情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载		相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的mani		fest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
+			离线情况下，浏览器就直接使用离线存储的资源。
+		11.请描述一下 cookies，sessionStorage 和 localStorage 的区别？
+		>>`cookie`是网站为了标识用户身份而储存在用户本地终端（ClientSide）上的数据（通常已经过加密）。cookie数据始终在同源的http请求中携带（即使不需要），也会在浏览器和服务器间来回传递。
+			`sessionStorage`和`localStorage`不会自动把数据发给服务器，仅在本地保存。
+			存储大小：
+			  cookie数据大小不能超过4K。
+			  sessionStorage和localStorage虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
+			有效时间：
+			  cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
+			  sessionStorage  数据在当前浏览器窗口关闭后自动删除
+			  localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据
+		12.iframe 有哪些缺点？
+		>>iframe会阻塞页面onload事件；还会影响页面并行加载。如果需要使用iframe，最好通过JavaScript动态给iframe添加src属性值，这样可以绕开以上两个问题。
+		13.label的作用：定义表单控件之间的关系，当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。
+			<label for="Name">Number:</label>
+			<input type="text" name="Name" id="Name" />
+			<label>Date:<input type="text" name="B" /></label>
+		14.HTML5的form如何关闭自动完成功能？
+		>>给不想要提示的 form 或下面某个 input 设置为 `autocomplete = off`。
+		15.如何实现浏览器内多个标签页之间的通信？
+		>>调用localStore  cookie
+		16.如何在页面上实现一个圆形的可点击区域？
+		>>(1) map + area 或者 svg
+			(2) border-radius
+			(3) 纯js实现，需要求一个点在不在圆上的简单算法、获取鼠标坐标等等
+		17.实现 不使用 border 画出 1px 高的线，在不同浏览器的标准模式与怪异模式下都能保持一致的效果
+		>><div style="height:1px;overflow:hidden;background: #ccc"></div>
+		18.网页验证码是干什么用的？是为了解决什么安全问题？
+		>>区分用户是计算机还是人的公共全自动程序。可以防止：恶意破解密码、刷票、论坛灌水；
+			有效防止黑客对某一个特定注册用户用特定程序通过暴力破解的方式进行不断的登录尝试。
+		19.CSS3新增伪类举例？
+		>>p:first-of-type 选择属于其父元素的首个 <p> 元素的每个 <p> 元素。
+
+	        p:last-of-type  选择属于其父元素的最后 <p> 元素的每个 <p> 元素。
+
+	        p:only-of-type  选择属于其父元素唯一的 <p> 元素的每个 <p> 元素。
+
+	        p:only-child    选择属于其父元素的唯一子元素的每个 <p> 元素。
+
+	        p:nth-child(2)  选择属于其父元素的第二个子元素的每个 <p> 元素。
+
+	        :enabled  :disabled 控制表单控件的禁用状态。
+
+        	:checked        单选框或复选框被选中。
+        20.兼容性问题？
+        >> 1.* Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,
+
+			可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决.
+			2.active了解决方法是改变CSS属性的排列顺序:
+
+			L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
+		21.如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）
+        >>多数显示器默认频率是60Hz，即1秒刷新60次，所以理论上最小间隔为1/60＊1000ms ＝ 16.7ms
+        22.overflow: scroll时不能平滑滚动的问题怎么处理?
+        >>-webkit-overfflow-scrolling:touch;
+
+
+        神链接－超全：https://leohxj.gitbooks.io/front-end-database/javascript-basic/scoping-and-hoisting.html
+
+	</div>
+</body>
+</html>

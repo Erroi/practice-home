@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>magnifier</title>
+	<style type="text/css">
+		.zoomPan{width:370px;left:100px;position:relative; }
+		.sh{zoom:1;background:#eee;filter:progid:DXImageTransform.Microsoft.dropShadow(color='#54000000', OffX=2,OffY=2);-webkit-box-shadow:4px 4px 4px #666;-moz-box-shadow:4px 4px 4px #666;}
+		#zoom{position:absolute;width:254px;height:254px;border:3px solid #fff;left:-9999px;top:0;overflow:hidden;background:#fff;}
+		#zoom img{position:relative;}
+		h1{color:#FF0080;border-bottom:5px solid #ddd;padding:10px;}
+		h4{text-align:right;padding:20px;border-top:1px solid #ddd;color:#ccc;}
+	</style>
+</head>
+<body>
+	<div class="box">
+
+	<div class="zoomPan" id="zoomPan">
+	    <img src="../img/WechatIMG3.jpeg" alt=""  style="width:300px;height:400px"/>
+	    <div id="zoom" class="sh"><img src="../img/WechatIMG3.jpeg" alt="" /></div>
+	</div>
+
+	</div>
+</body>
+<script type="text/javascript">
+	//图片放大函数
+function zoomBox() {this.index.apply(this, arguments)}//apply()继承机制，该方法有两个参数，用作 this 的对象和要传递给函数的参数的数组
+zoomBox.prototype = {//使用 prototype 属性来向对象添加属性
+    index: function(win,zoom) {
+        var win=document.getElementById(win);
+        var box=document.getElementById(zoom);
+        var img=box.getElementsByTagName('IMG')[0];
+        var zoom=img.width/win.getElementsByTagName('IMG')[0].width;
+        var z=Math.round(box.offsetWidth/2);
+        win.onmousemove=function (e){
+            e = e || window.event;
+            var x=e.clientX,y=e.clientY, ori=win.getBoundingClientRect();
+            if (x>ori.right+20||y>ori.bottom+20||x<ori.left-20||y<ori.top-20)box.style.display='none';
+            x-=ori.left;
+            y-=ori.top;
+            box.style.left=x-z+'px';
+            box.style.top=y-z+'px';
+            img.style.left=-x*zoom+z+'px';
+            img.style.top=-y*zoom+z+'px';
+        }
+        win.onmouseover=function (){box.style.display=''}
+    }
+};
+window.onload=function (){
+    new zoomBox('zoomPan','zoom')
+}
+</script>
+</html>
