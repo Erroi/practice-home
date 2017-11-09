@@ -11,7 +11,7 @@
     }
     .wrapper > *{
     	padding:10px;
-    	flex:1 100%;     单占一行且宽度100%
+    	flex:1 100%;     /*单占一行且宽度100%*/
     }
     @media all and (min-width:600px){
     	.aside{
@@ -19,11 +19,11 @@
     	}
     }
     @media all and (min-width:800px){
-    	.main{flex:3 0px;}     flex-grow|flex-shrink|flex-basis  默认0 1 auto      若想设在同一行：把本元素设置flex：int 0px
+    	.main{flex:3 0px;}     /*flex-grow|flex-shrink|flex-basis  默认0 1 auto      若想设在同一行：把本元素设置flex：int 0px*/
     	.aside-1{order:1;}
     	.main{order:2;}
-    	.aside-2{order:3;}    flex-grow:子项目所占剩余空间的比例，默认0
-    	.footer{order:4;}     order:设置伸缩项目在文档流中出现的顺序
+    	.aside-2{order:3;}    /*flex-grow:子项目所占剩余空间的比例，默认0*/
+    	.footer{order:4;}     /*order:设置伸缩项目在文档流中出现的顺序*/
     }
     
     .header {

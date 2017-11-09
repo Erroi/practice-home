@@ -139,7 +139,9 @@ I.上下文：在js中this通常指向其拥有者，this只能在函数内部�
   var dog = {
   	words:'...'
   }
-  pet.speak.call(dog,'Speak')   //将pet的speak方法赋给dog，同时给这个方法传入参数‘Speak’
+  pet.speak.call(dog,'Speak')   //将pet的speak方法赋给dog，同时给这个方法传入参数‘Speak’  方法1
+  pet.speak.apply(dog,['Speak']);  //方法2
+  pet.speak.bind(dog)('Speak');    //方法3
 
   I2.applay  传入的参数是数组类型的
   I3.call applay 实现继承
