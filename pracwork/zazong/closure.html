@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        // 1 使变量的值始终保持在内存中，通过掉result函数，改变n的值，n一直保持在内存中，并没有被垃圾回收机制回收。
+        // 这样就可以在f1的外部访问到其内部的变量n
+        function f1() {
+            var n = 999;
+
+            function f2() {
+                alert(n++);
+            }
+            return f2;
+        }
+        var result = f1();
+        result(); //999
+        result(); //1000
+
+        //2 用闭包模拟私有方法：不仅有利于限制对代码的访问，还提供了管理全局命名空间,避免非核心的方法弄乱公共接口部分.
+        //模块模式：用闭包定义公共函数，且可以访问私有函数和变量。
+        var Counter = (function () {
+            var privateCounter = 0;
+
+            function changeBy(val) {
+                privateCounter += val;
+            };
+            return {
+                increment: function () {
+                    changeBy(1);
+                },
+                decrement: function () {
+                    changeBy(-1);
+                },
+                value: function () {
+                    return privateCounter;
+                }
+            }
+        })();
+
+        alert(Counter.value()); //0
+        Counter.increment();
+        Counter.increment();
+        alert(Counter.value()); //2
+        Counter.decrement();
+        alert(Counter.value()); //1 
+
+        //测试一
+        var name = "the Window";
+        var object = {
+            name: "my Object",
+
+            getNameFunc: function () {
+                return function () {
+                    return this.name;
+                }
+            }
+        }
+        alert(object.getNameFunc()()); //"the Window"
+        //测试二
+        var name = "this Window";
+        var object = {
+            name: "my Object",
+
+            getNameFunc: function () {
+                var that = this;
+                return function () {
+                    return that.name;
+                }
+            }
+        }
+        alert(object.getNameFunc()()); //"the Object"
+
+        //    //测试三
+        var oli = document.getElementsByTagName('li');
+        var i;
+        for (i = 0; i < 5; i++) { //js按顺序执行，到这里循环，i到5；当有点击事件的时候 i已等于5
+            oli[i].onclick = function () {
+                alert(i);
+            }
+        }
+        console.log(i); //5
+
+        (function () {
+            alert(i); //5
+        }());
+        // 以上全部弹出i为5，
+        // 用闭包达到想要的目的,给点击事件绑定的匿名函数传递i后立即执行返回一个内部的匿名函数，传入的参数保存在局部变量a，然后内部的匿名函数一直保存着a的引用。
+        var oli = document.getElementsByTagName('li');
+        var i;
+        for (i = 0; i < 5; i++) {
+            oli[i].onclick = (function (num) {
+                let a = num;
+                return function () {
+                    alert(a); // 0 1 2 3 4
+                }
+            })(i)
+        }
+        console.log(i) //5
+
+        //闭包应用1.匿名自执行函数(function(){})();如UI的初始化，见self_adaption手机端自适应，函数只需执行一次，内部变量无需维护，不会污染全局对象
+        //2.核心模块封装/模块化代码
+        var person = function () {
+            var name = "default";
+            return {
+                getName: function () {
+                    return name;
+                },
+                setName: function (newName) {
+                    name = newName;
+                }
+            }
+        }();
+        console.log(person.name); //直接访问，结果为undefined    
+        console.log(person.getName()); //default 
+        person.setName("jozo");
+        console.log(person.getName()); //jozo
+        //3.实现面向对象中的对象
+        function Person() {
+            var name = "default";
+
+            return {
+                getName: function () {
+                    return name;
+                },
+                setName: function (newName) {
+                    name = newName;
+                }
+            }
+        };
+
+        var john = new Person();
+        console.log(john.getName());
+        john.setName("person1");
+        console.log(john.getName()); // person1  
+
+        var jack = Person();
+        console.log(jack.getName());
+        jack.setName("person2");
+        console.log(jack.getName()); //person2
+
+        //内存泄漏
+        window.onload = function () {
+            var el = document.getElementById("id");
+            el.onclick = function () { //执行这段代码的时候，将匿名函数对象赋值给el的onclick属性；然后匿名函数内部又引用了el对象，存在循环引用，所以不能被回收
+                alert(el.id);
+            }
+        }
+        //解决方法
+        window.onload = function () {
+            var el = document.getElementById("id");
+            var id = el.id; //解除循环引用
+            el.onclick = function () {
+                alert(id);
+            }
+            el = null; // 将闭包引用的外部函数中活动对象清除
+        }
+    </script>
+</body>
+
+</html>
