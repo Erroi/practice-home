@@ -13,10 +13,24 @@ b.name = "robbins";
 
 a === b; // true
 
-//对于对基本类型，
+//对于对基本类型，是不可变的。
 var a = "Andrew",
 b = a;
 
 b = "Robbins";
 
 a === b; // false
+
+//基本类型的属性是只读和临时的
+var hello = 'hello';
+hello.slice(1);   // 'ello'
+hello;    //'hello'
+
+typeof 's';  //'string'
+typeof null; //object;
+typeof undefined;  //'undefined'
+typeof new String(s);  //'object'
+
+//js值分为两种类型：基本类型和对象类型
+//基本类型：String Number Boolen,Symbol,undefined,null
+//对象类型：Function Object Array
