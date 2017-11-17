@@ -11,6 +11,7 @@
                                     + ',minimum-scale' + 1/dpr);
 
         var clientWidth = docEl.clientWidth;
+        // document.body.style.height =  docEl.clientHeight + 'px';
         if(!clientWidth) return;
         docEl.style.fontSize = (clientWidth / 18.75) + 'px';    //20px
     };
