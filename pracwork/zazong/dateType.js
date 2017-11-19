@@ -34,3 +34,20 @@ typeof new String(s);  //'object'
 //js值分为两种类型：基本类型和对象类型
 //基本类型：String Number Boolen,Symbol,undefined,null
 //对象类型：Function Object Array
+
+function Cat(name,color){
+    this.name = name;
+    this.color = color;
+}
+
+Cat.prototype.type = '猫科动物';
+Cat.prototype.eat = function(){alert('吃鱼')};
+var cat1 = new Cat('大毛','黄色');
+var cat2 = new Cat('二毛','黑色');
+
+console.log(cat1.hasOwnProperty('name'));    //判断 name属性是实例对象cat1的自身属性  true
+console.log(cat1.hasOwnProperty('eat'));    //判断 eat方法是实例对象cat1的自身属性 false，是继承自prototype原型上的
+console.log(cat1 instanceof Cat);           //判断 cat1是否是Cat的实例  true
+console.log('name' in cat1);                //判断 cat1是否具有name属性，不管是自身的还是继承自prototype的  true
+console.log('eat' in cat1);                 //true
+
