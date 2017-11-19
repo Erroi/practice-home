@@ -32,9 +32,14 @@ module.exports = {
             exclude: path.resolve(__dirname,'node_modules'),
             loader: 'file-loader!url-loader',    //在模板中引入相对路径图片 <img src="${ require('../../xxx.png')}"
             query:{
-                limit:5000,
-                name:'assets/[name]-[hash:5].[ext]'
-            }
+                limit:5000,   //HTTP请求可以缓存，base64小于值会嵌入dom中
+                name:'assets/[name]-[hash:5].[ext]'  //指定路径 assets目录下 hash的5位  ext自己的后缀名
+            },
+            //另一种方式
+            loader:[
+                'url-loader?limit=20000&name=assets/[name]-[hash:5].[ext]',
+                'image-webpack'  //对图片进行压缩
+            ]
         },{
             test: /\.html$/,
             loader:'html-loader',
