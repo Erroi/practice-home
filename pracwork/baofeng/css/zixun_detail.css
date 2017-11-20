@@ -32,7 +32,7 @@ header h4{
 main{
     width:100%;
     position: absolute;
-    top:2.5rem;
+    top:0rem;
     bottom:2.5rem;
     overflow: scroll;
 }
@@ -62,13 +62,15 @@ main .content section{
 main .content .eye img,main .content .zan img{
     width:1rem;
     height:1rem;
-    margin-right:1rem;
+}
+main .content .eye{
+    margin-right:4rem;
 }
 main .instrest{
     width:100%;
     height:auto;
     font-size: 0.6rem;
-    background-color:rgb(187, 186, 186);
+    background-color:rgb(226, 235, 245);
 }
 main .instrest p.other{
     line-height: 1rem;
@@ -110,8 +112,14 @@ main .instrest .card .card_news .left .news_auth{
     display: -webkit-flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     color:#ccc;
     font-size: 0.6rem;
+}
+main .instrest .card .card_news .left .news_auth .news_eyes{
+    display: inline-block;
+    width:1rem;
+    height: 1rem;
 }
 main .instrest .card .card_news .left .news_auth img{
     width:1rem;
@@ -123,6 +131,74 @@ main .instrest .card .card_news .right{
 main .instrest .card .card_news .right img{
     width:100%;
     height:4rem;
+}
+main .comment {
+    width:100%;
+    height:auto;
+    background-color: #fff;
+    padding-top:2rem;
+    /* padding:0.5rem; */
+}
+main .comment .comment-one{
+    width:100%;
+    height:7.5rem;
+    padding:0.5rem;
+    border-bottom: 1px solid rgb(145, 143, 143);
+}
+main .comment .comment-all{
+    font-size: 0.8rem;
+    background-color: rgb(226, 235, 245);
+    height:1rem;
+    line-height: 1rem;
+    padding-left: 0.5rem;
+    font-size: 0.6rem;
+}
+main .comment .userInfo{
+    width:100%;
+    height:2rem;
+    color:rgb(168, 168, 168);
+    display: inline-flex;
+    display: -webkit-inline-flex;
+    align-items: center;
+}
+main .comment .userInfo .userLogo{
+    width:2rem;
+    height:2rem;
+    border-radius: 50%;
+}
+main .comment .userInfo .user-name{
+    margin-left:0.5rem;
+    font-size: 0.7rem;
+}
+main .comment .comment-one .user-bottom{
+    width:100%;
+    height:1.5rem;
+    line-height: 1.5rem;
+    font-size: 0.6rem;
+    color:rgb(168, 168, 168);
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .comment .user-bottom .user-zan{
+    width:1rem;
+    height:1rem;
+}
+main .comment .comment-det{
+    width:100%;
+    height:3rem;
+    font-size: 0.6rem;
+    /* padding:0.5rem; */
+    line-height: 1rem;
+    /* border-bottom: 1px solid #ccc; */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 main aside{
     position: fixed;
