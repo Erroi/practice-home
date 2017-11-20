@@ -75,17 +75,17 @@ main .instrest p.other{
     margin-left:0.5rem;
 }
 main .instrest .card{
-    padding:0.1rem 0.5rem;                   
+    /* padding:0.1rem 0.5rem;                    */
 }
 main .instrest .card .card_news{
-    width:17.75rem;
-    /* width:100%; */
+    /* width:17.75rem; */
+    width:100%;
     padding: 0.5rem;
     height: 5rem;
-    border:1px solid #fff;
-    /* border:1px solid #ccc; */
-    border-radius: 10px;
-    margin-top:0.1rem;
+    /* border:1px solid #fff; */
+    border:1px solid #ccc;
+    /* border-radius: 10px; */
+    /* margin-top:0.1rem; */
     background-color:#fff;
     display: flex;
     display: -webkit-flex;
@@ -168,10 +168,7 @@ footer button{
     width: 3rem;
     border:1px solid #ccc;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     font-size: 0.6rem;
-}
-footer button img{
-    width: 1rem;
-    height: 1rem;
+    box-shadow: 2px 2px 10px #5a4646;
 }
