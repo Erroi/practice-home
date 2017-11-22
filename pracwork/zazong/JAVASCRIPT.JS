@@ -155,3 +155,25 @@ H.观察者模式：这是一种创建松散耦合代码的技术。它定义对
 
 
 J.SPA单页面应用程序：其呈现的最初内容会加载必须的HTML和JS、css，而它的后继操作全部由js控制，是使用REST化的web服务执行的，这种服务对AJAX请求进行响应，并通过JSON提供数据。所有操作都在这一张页面上进行。
+
+补充--抽象概念：执行上下文execution Context 栈级，其中的1变量、函数声明、函数参数。
+函数声明为什么会被前置：1.变量初始化阶段，函数VO按照如下顺序填充：
+										  1.函数参数（若为传入，初始化该参数为undefined）；
+										  2.函数声明（若发生与1命名冲突，会覆盖）
+										  3.变量声明（初始化变量值为undefined，若与1 2 发生命名冲突，会忽略）
+										  例：function foo(x,y,z){
+											  function x(){};
+											  alert(x);
+										  };  foo(200)  //function(){}
+										  例：function foo(x,y,z) {
+											  function func(){}; //函数声明
+											  var func;  //变量声明 会忽略
+											  console.log(func);
+										  }; foo(100); // function(){}
+										  例：function foo(x,y,z) {
+											function func(){}; //函数声明
+											var func = 1;  //变量声明 会忽略
+											console.log(func);
+										}; foo(100); // 1   第二回合 赋值
+										所以，函数表达式(var e = function _e(){})不会影响VO，
+					2.代码执行阶段：函数声明 function x(){} 会被提前处理
