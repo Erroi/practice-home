@@ -51,3 +51,13 @@ console.log(cat1 instanceof Cat);           //判断 cat1是否是Cat的实例  
 console.log('name' in cat1);                //判断 cat1是否具有name属性，不管是自身的还是继承自prototype的  true
 console.log('eat' in cat1);                 //true
 
+
+//科学计数法E
+2.3E7;
+let num = new Number(2.3E7);  //23000000
+
+(1.55).toFixed(1);   //1.6  四舍五入
+(2.55).toFixed(1);   //2.5  失效
+(2.55 + 1e-14).toFixed(1); //2.6  矫正方法
+
+
