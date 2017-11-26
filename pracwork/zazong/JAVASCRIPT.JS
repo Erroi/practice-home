@@ -177,3 +177,69 @@ J.SPA单页面应用程序：其呈现的最初内容会加载必须的HTML和JS
 										}; foo(100); // 1   第二回合 赋值
 										所以，函数表达式(var e = function _e(){})不会影响VO，
 					2.代码执行阶段：函数声明 function x(){} 会被提前处理
+
+
+K. OOP 面向对象编程：对象指类的实例，它将对象作为程序的基本单元，将程序和数据封装其中，以提高重用性、灵活性、拓展性。有继承、封装、多态、抽象的特点。
+	1 当我们用函数声明创建一个函数时，都会有一个预设的prototype属性，且这个属性是个对象{}，这个对象默认有constructor属性。   .prototype 是abc的属性，不是原型_proto_
+			function abc(){};   abc.prototype //abc {}   
+								typeof abc.prototype  //object
+	2 基于原型的继承
+			function Foo(){              //Foo.prototype = {
+				this.y = 2;					//constructor:Foo,
+											//_proto_:Object.prototype,  所有的函数的原型最终都指向Object的prototype，Object自身拥有toString()...方法，而oject的原型指向null(Object.prototype._proto_ = null)
+			};								//x:1}
+			typeof Foo.prototype //Object {}
+			Foo.prototype.x = 1;                    
+			var obj3 = new Foo();
+			obj3.y;  //2  this指向obj3
+			obj3.x;  //1	x是Foo的原型proto上的
+	3 一个实例继承自另一个实例
+			function Person(name,age){
+				this.name = name;
+				this.age = age;
+			}
+			Person.prototype.MAx_NUM = 2;
+			Person.prototype.MAX_age = 2;
+			Person.prototype.walk = function(){
+				return this.name + 'is walk';
+			};
+
+			function Students(name,age,className){
+				Person.call(this,name,age);   //继承了实例属性
+				this.className = className;
+			};																	
+			Students.prototype = Object.create(Person.prototype);   //继承原型属性和方法，同时 用Object.create创建一个新的对象，防止Students和Person指向同一个，以便Students可以设定自己私有的原型方法
+			Students.prototype.constructor = Students;				//Students.prototpe={constructor:  ,_proto_:Person.prototype,...}
+			Students.prototype.walk = function(){					//这里会覆盖Person上的walk方法。
+				console.log(this.name + 'is walk' + this.className)
+			}
+			Students.prototype.leanning = function(subject){
+				console.log(this.name + 'is leaning' + subject + 'at this' + this.className)
+			}
+
+	4.判断一个属性或方法是否属于对象自身还是原型链上的
+			'name' in Students; true  //会一直向上查找
+			Students.hasOwnPrototype('walk') //false 自身没有这个属性
+	5. object instanceof function;左边要求是一个，右边要求是函数或构造器(必须有prototype属性)；instanceof会判断右边构造器prototype属性是否会出现在左边对象的原型连上。
+			[2,3] instanceof Array; true  //[2,3].prototype._proto_ = Object;  Object的原型链上有Array
+			new Object() instanceof Array; false  //new Object().prototype._proto_ = null
+			'2349d' instanceof Array; false   //String 基本类型 是没有prototype属性的。
+
+O.RegExp 正则
+			1.分组
+			（X）分组，并记录匹配到的字符串  /(abc)/
+			 \n 表示使用分组符(x)匹配到的字符串  /(abc)\1/.test('abcabc')    //  这里的\1指的是 记录的前面匹配到的abc
+			 (?:X) 仅分组   /(?:abc)(def)\1/.test('abcdefdef');			//这里的\1 指的是 记录了的分组 def
+							 /(abc)(def)\1\2/.test('abcdefabcdef');			// 这里的\1 匹配的是记录了的分组abc  \2 匹配的是记录了的分组def
+			2.贪婪算法 * +
+			X*  0次或多次
+			X+	1次或多次
+			X?  0次或1次
+			3.非贪婪算法
+			X*?  0次  取最少的
+			X+?  1次	 取最少的
+			4.flag
+			global    g
+			ignoreCase  i
+			multiline   m 换行匹配
+			

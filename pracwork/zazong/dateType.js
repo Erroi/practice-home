@@ -27,6 +27,7 @@ hello.slice(1);   // 'ello'
 hello;    //'hello'
 
 typeof 's';  //'string'
+typeof NaN;  //number
 typeof null; //object;
 typeof undefined;  //'undefined'
 typeof new String(s);  //'object'
@@ -61,3 +62,13 @@ let num = new Number(2.3E7);  //23000000
 (2.55 + 1e-14).toFixed(1); //2.6  矫正方法
 
 
+null === null; //true
+undefined === undefined; //true
+NaN != NaN
+new Object != new Object;
+null == undefined;  //true
+
+创建对象的方式
+1 对象字面量  var obj = {z:1,u:2};
+2 new Foo()  new 实例化对象
+3 var obj = Object.create({x:1})
