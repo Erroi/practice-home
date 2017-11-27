@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>websocket</title>
+</head>
+<body>
+    <h2>websocket test</h2>
+    <input type="text" id="message">
+    <button id="submit">submit</button>
+    <p id="content"></p>
+
+    <script type="text/javascript">
+        // var websocket = new WebSocket("ws://echo.websocket.org/");
+        var websocket = new WebSocket('ws://localhost:8001/');
+        websocket.onopen = function(){
+            document.getElementById('content').innerHTML = 'Connect';
+        };
+        websocket.onclose = function(){
+            document.getElementById('content').innerHTML = 'Close';
+        }
+        websocket.onmessage = function(e){
+            document.getElementById('content').innerHTML = e.data;
+        }
+        document.getElementById('submit').onclick = function(){
+            websocket.send(document.getElementById('message').value)
+        }
+    </script>
+</body>
+</html>

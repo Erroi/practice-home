@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>chart</title>
+</head>
+<body>
+    <h2>Chart Room</h2>
+    <input type="text" id="message">
+    <button id="submit">submit</button>
+    <p id="content"></p>
+
+    <script type="text/javascript">
+
+        function showMessage(data){
+            var div = document.createElement('div');
+            if(data.type == 'enter'){
+                div.style.color = "green";
+            }else if(data.type == 'leave'){
+                div.style.color = 'red'
+            }
+            div.innerHTML = data.data;
+            document.body.appendChild(div);
+        }
+
+
+        // var websocket = new WebSocket("ws://echo.websocket.org/");
+        var websocket = new WebSocket('ws://localhost:3000/');
+        websocket.onopen = function(){
+            document.getElementById('submit').onclick = function(){
+                var text = document.getElementById('message').value;
+                if(text){
+                    websocket.send(text)
+                        }
+                    }
+        };
+        websocket.onclose = function(){
+            showMessage(JSON.parse(e.data))
+            // document.getElementById('content').innerHTML = 'Close';
+        }
+        websocket.onmessage = function(e){
+            showMessage(JSON.parse(e.data));
+            // document.getElementById('content').innerHTML = e.data;
+
+        }
+        
+    </script>
+</body>
+</html>
