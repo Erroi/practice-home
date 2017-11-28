@@ -77,3 +77,12 @@ class A{}
 class B extends A{}
 B.__proto__ === A   //true
 B.prototype.__proto__ === A.prototype  //true
+
+箭头函数：()=>{}
+特点1  不会创建this，不需要绑定this，它使用的是上一级执行上下文的this。
+	2  this是词法上的绑定，严格模式中与this相关的规则都将被忽略。
+	3 通过call() apply()调用一个函数时，只是传入参数而已，与this没有影响。
+	4 不绑定Arguments对象，所以arguments[0]无用，可以使用rest表达式来代替arguments对象。
+		var f = (...args)=> args[0];
+	5 不能使用new操作符
+	6 没有prototype属性。
