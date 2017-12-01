@@ -86,3 +86,13 @@ B.prototype.__proto__ === A.prototype  //true
 		var f = (...args)=> args[0];
 	5 不能使用new操作符
 	6 没有prototype属性。
+
+
+
+字符串方法
+'hello'.includes('he')  //true
+'hello'.startsWith('he') //true  
+'hello'.startsWith('he',2)
+'hello'.includes('he',2)  //从第2位开始到结束位置
+'hello'.endsWith('he') //false   可传第二个参数，
+'hello'.endsWith('he',2) //表示前两个字符，是否以he结尾

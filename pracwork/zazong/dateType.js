@@ -71,4 +71,17 @@ null == undefined;  //true
 创建对象的方式
 1 对象字面量  var obj = {z:1,u:2};
 2 new Foo()  new 实例化对象
-3 var obj = Object.create({x:1})
+3 var obj = Object.create({x:1});
+
+
+//取整
+Math.trunc(4.1) //4
+Math.trunc(4.9) //4
+//判断正负
+Math.sign(-5)  //-1
+Math.sign(5)  //1
+Math.sign(0) //0
+//计算一个数的立方根
+Math.cbrt(2) //1.25..
+//指数运算符
+2 ** 3  //8 
