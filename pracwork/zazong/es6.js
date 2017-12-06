@@ -17,7 +17,7 @@ class Bar {
 	}
 
 	constructor(props) {
-		super(props);
+		super(props);     //super作为一个关键字，指向原型对象时  可直接调用 super.XXX  
 		//....
 	}
 }

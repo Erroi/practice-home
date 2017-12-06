@@ -14,10 +14,11 @@ io.on('connection',function(socket){
 
     socket.on('message',function(str){
         io.emit('message',socket.nickname + 'say:' + str);
+        console.log('message',socket.nickname + 'say:' + str);
     })
 
     socket.on('disconnect',function(){
         io.emit('leave',socket.nickname + 'was leaved')
     })
 });
-console.log('socket server at port' + PORT);
+console.log('socket server at port: ' + PORT);

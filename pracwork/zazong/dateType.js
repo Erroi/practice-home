@@ -83,5 +83,57 @@ Math.sign(5)  //1
 Math.sign(0) //0
 //计算一个数的立方根
 Math.cbrt(2) //1.25..
+//返回x的y次幂   x ** y
+Math.pow(x,y)  //Math.pow(2,3)  8
+//取绝对值
+Math.abs(-2) //2
+//返回一个数的向上取整
+Math.ceil(3.02) //3
+//返回一个数的向下取整
+Math.floor(3.98) //3
+//返回0到1之间的伪随机数
+Math.random()
+//返回1到100的随机数
+Math.floor((Math.random() * (max - min)) + min);
+//四舍五入后的取整
+Math.round(3.43)  //3
+
+
 //指数运算符
 2 ** 3  //8 
+
+数组
+转为真正的数组的方法：
+A 、扩展运算符(...) 
+Math.min(...[2,5,3])  Math.min(2,5,3) //2
+//合并数组
+arr1.concat(arr2,arr3);
+[...arr1,...arr2,...arr3];
+arr2.reverse()
+对于有Iterator接口的对象：如Map结构和Set结构可使用(...),否则会报错
+
+B 、 Array.from() 用于将 类似数组的对象  和 可遍历的对象 转为真正的数组 如Map结构和Set结构；
+// NodeList对象
+let ps = document.querySelectorAll('p');
+Array.from(ps).forEach(function (p) {
+  console.log(p);
+});
+
+// arguments对象
+function foo() {
+  var args = Array.from(arguments);
+  // ...
+}
+
+C、Array.of(2,3,4)  将一组值转化为数组  //[2,3,4]
+
+[1,3,4,5].find(function(value,index,arr){
+    return value >3;
+})
+
+new Array(3).full(7) //[7,7,7]
+arr1.keys()
+arr.values()
+arr.entries()
+arr.includes('4')
+
