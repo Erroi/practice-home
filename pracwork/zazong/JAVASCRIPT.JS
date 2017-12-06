@@ -242,4 +242,6 @@ O.RegExp 正则
 			global    g
 			ignoreCase  i
 			multiline   m 换行匹配
+
+p.对象Object属性：Object.getOwnPropertyDescriptor(Object,'prototype');  返回Object的prototype属性
 			
