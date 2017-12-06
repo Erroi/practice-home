@@ -71,6 +71,7 @@ Object.keys(obj) 返回一个数组，遍历的是obj的自身可遍历的属性
 Object.values(obj) 同上，返回数组
 Object.entries(obj)  同上，返回数组 //[['foo','bar'],['baz','42'],[]]
 
+
 F.命名空间：namespace，为避免命名冲突，命名覆盖等问题。
 //1创建简单 对象字面量 来打包所有相关函数和变量，实现命名空间作用。
 var MYNAMESPACE = {
@@ -188,7 +189,7 @@ K. OOP 面向对象编程：对象指类的实例，它将对象作为程序的�
 	1 当我们用函数声明创建一个函数时，都会有一个预设的prototype属性，且这个属性是个对象{}，这个对象默认有constructor属性。   .prototype 是abc的属性，不是原型_proto_
 			function abc(){};   abc.prototype //abc {}   
 								typeof abc.prototype  //object
-	2 基于原型的继承   
+	2 基于原型的继承
 			function Foo(){              //Foo.prototype = {
 				this.y = 2;					//constructor:Foo,
 											//_proto_:Object.prototype,  所有的函数的原型最终都指向Object的prototype，Object自身拥有toString()...方法，而oject的原型指向null(Object.prototype._proto_ = null)
@@ -198,7 +199,7 @@ K. OOP 面向对象编程：对象指类的实例，它将对象作为程序的�
 			var obj3 = new Foo();
 			obj3.y;  //2  this指向obj3
 			obj3.x;  //1	x是Foo的原型proto上的
-	3 一个实例继承自另一个实例  B--使用 Object.create()方法
+	3 一个实例继承自另一个实例
 			function Person(name,age){
 				this.name = name;
 				this.age = age;
@@ -229,13 +230,13 @@ K. OOP 面向对象编程：对象指类的实例，它将对象作为程序的�
 			[2,3] instanceof Array; true  //[2,3].prototype._proto_ = Object;  Object的原型链上有Array
 			new Object() instanceof Array; false  //new Object().prototype._proto_ = null
 			'2349d' instanceof Array; false   //String 基本类型 是没有prototype属性的。
-
-	6.创建对象和原型链方法：
+	6. 创建对象和原型链方法：
 			0.使用普通方法：
 				a = ['uo','yhss'];  // a ---> Array.prototype --> Object.prototypr ---> null
 			A.使用构造器方法（new)；
 			B.Object.create(a);    //b ----> a ---->Object.prototype ---> null
 			c.使用class 关键字；
+
 
 O.RegExp 正则
 			1.分组
@@ -255,5 +256,39 @@ O.RegExp 正则
 			ignoreCase  i
 			multiline   m 换行匹配
 
-p.对象Object属性：Object.getOwnPropertyDescriptor(Object,'prototype');  返回Object的prototype属性
+p.对象Object属性：Object.getOwnPropertyDescriptor(Object,'prototype');  返回Object的prototype属性。
+创建属性的一种方式：Object.defineProperty(cat,'price',{enumerable:false,value:1000}) cat的不可枚举属性price，值为1000
+对象属性的set 、 get方法：
+var man={
+	name:'bonn',
+	weibo:'beibo',
+	get age(){
+		return new Date().getFullYear() - 1988;
+	},
+	set age(val){
+		console.log(this.name + val)     //可以取到自身属性的实时值
+	}
+}
+console.log(man.age)   //28   自动访问get age函数
+man.age = 100;  对age赋值的时候，自动调用set age方法；
+
+对象创建属性 defineProperty:
+	var person = {};
+	Object.defineProperty(person,'name',{
+		configurable:true,   //属性标签是否可以被修改、是否可以被delete，true可以
+		writable:false,     //此属性禁止修改
+		enumerable:true,    //此属性可以被遍历  true可以；如果是false Object.keys(person);  //是没有name属性的
+		value:'Bobe'
+	});
+	person.name;    //Bobe
+	person.name = 1;
+	person.name;  //Bobe
+	delete person.name  // false
+
+	查看name属性性质
+	Object.getOwnPropertyDescriptor(person,'name');   //object{value:'Bobe',configurable:true,writeble:true,enumerable:false }
+	冻结属性：
+	Object.freeze(person);    将writeable变为false，不能重写属性；  Object.isFrozen(person)  //true 
+	Object.getOwnPropertyDescriptor(person,'name');   //object{value:'Bobe',writeble:false,configurable:true,enumerale:false }
+	
 			
