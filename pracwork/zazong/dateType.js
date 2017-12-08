@@ -97,12 +97,27 @@ Math.random()
 Math.floor((Math.random() * (max - min)) + min);
 //四舍五入后的取整
 Math.round(3.43)  //3
-
-
 //指数运算符
 2 ** 3  //8 
 
-数组
++ obj  // +'78'  78  转数字类型
+
+数组：
+var arr = new Array();    new Array(100);// undefined * 100    
+                            new Array(1,true,4,'uy',null) //[1,true,4,'uy',null]
+稀疏数组：并不含有从0开始的连续索引：
+    例：var arr1 = [undefined];
+        var arr2 = new Array(1);
+        0 in arr1; //true;
+        0 in arr2;  //false;
+        arr1.length = 100;
+        arr1[99] = 123;
+        99 in arr1;  //true
+        98 in arr2;  //false
+        var arr = [,,];
+        0 in arr;  //false;
+
+Array.reduce((pre,cur,curIndex,arr)=>{return pre + cur},0);  //第二个参数0 为初始值。
 转为真正的数组的方法：
 A 、扩展运算符(...) 
 Math.min(...[2,5,3])  Math.min(2,5,3) //2
@@ -136,4 +151,3 @@ arr1.keys()
 arr.values()
 arr.entries()
 arr.includes('4')
-
