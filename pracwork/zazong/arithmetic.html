@@ -54,6 +54,27 @@ console.log(factorial(5))
 
 //概念：栈：一种后入先出的数据结构 last in first out ,入栈使用push(),出战使用pop()
 
+let arr = [1, 2, 3, 4, 5, 6, 7, 8];
+
+function getSet(array, count, currentIndex) {
+	let resultArr = [];
+	for (let i = currentIndex; i < array.length - count + 1; i++) {
+		if (count > 1) {
+			let sub = getSet(array, count - 1, i + 1);
+			console.warn(sub)
+			sub.forEach(item => {
+				item.unshift(array[i])
+				resultArr.push(item);
+			})
+		}else {
+			// console.warn(array[i])
+			resultArr.push([array[i]])
+		}
+	}
+	return resultArr
+}
+
+console.warn(getSet(arr, 3, 0))
 
 //概念：队列：先进先出的数据结构 first in first out，
 //数组实现队列，push()在末尾加入一个元素，shift()产出队首的元素。
