@@ -43,13 +43,44 @@
 		xhr.open('POST',form.action);
 		xhr.send(formdata);
 		
-		xhr.setRequestHeader('Content-type',"application/x-www-form-urlencoded");
+		xhr.setRequestHeader('Content-type',"application/x-www-form-urlencoded");    //表单
 		xhr.send('name=yang&age=23');
+
+		xmlhttp.setRequestHeader("Content-Type", "application/json");  //json
+		xmlhttp.send(JSON.stringify({name:"John Rambo", time:"2pm"}));
 
 		//file
 		var formdata = new FormData();
 		formdata.append('files[]',files[0]);
 		xhr.send(formdata)
+
+		//跨域   withCredentails 设置为true时，可以跨域，XHR2支持IE678
+		xhr.withCredentials = true;
+
+		//XHR2 新增跟踪上传upload的progress属性，当进度有变化的时候回触发
+		xhr.upload.onprogress = function(){}
+
+		//状态码
+		302 //found 重定向
+		304 //not modified  资源未被修改
+		305 //use proxy 必须通过一个代理来访问资源
+		403 //forbidden  请求被服务器拒绝
+		404 //not found
+		503 //bad gateway  服务器现在不能提供服务  将来可能
+
+		//缓存
+/**
+1、Exprires: Expires是Web服务器响应消息头字段，在响应http请求时告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。
+2、Cache-Control: Cache-Control与Expires的作用一致，都是指明当前资源的有效期，控制浏览器是否直接从浏览器缓存取数据还是重新发请求到服务器取数据。  private max-age=XX no-cache
+只不过Cache-Control的选择更多，设置更细致，如果同时设置的话，其优先级高于Expires。
+3、Last-Modified/If-Modified-Since：Last-Modified/If-Modified-Since要配合Cache-Control使用。
+Last-Modified：标示这个响应资源的最后修改时间。
+If-Modified-Since：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Last-Modified声明，则再次向web服务器请求时带上头 If-Modified-Since，表示请求时间。
+4、Etag/If-None-Match：Etag/If-None-Match也要配合Cache-Control使用。
+Etag：web服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）。
+Apache中，ETag的值，默认是对文件的索引节（INode），大小（Size）和最后修改时间（MTime）进行Hash后得到的。
+If-None-Match：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Etage声明，则再次向web服务器请求时带上头If-None-Match （Etag的值）。
+*/
 		
 	</script>
 </body>
