@@ -78,6 +78,7 @@ main figure figcaption{
 main .card{
     width:100%;
     overflow: scroll;
+    -webkit-overflow-scrolling : touch;
     
     position: absolute;
     top:5rem;
@@ -126,6 +127,7 @@ main .card_news .left .news_auth .news_eyes{
     display: inline-block;
     width:1rem;
     height: 1rem;
+    line-height: 1rem;
 }
 main .card_news .left .news_auth  .news_eyes img{
     width:1rem;

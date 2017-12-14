@@ -35,6 +35,7 @@ main{
     top:0rem;
     bottom:2.5rem;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 main .content{
     width:100%;
