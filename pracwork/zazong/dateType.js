@@ -92,7 +92,7 @@ Math.ceil(3.02) //3
 //返回一个数的向下取整
 Math.floor(3.98) //3
 //返回0到1之间的伪随机数
-Math.random()
+Math.random()  //0到1  包括0不包括1
 //返回1到100的随机数
 Math.floor((Math.random() * (max - min)) + min);
 //四舍五入后的取整
