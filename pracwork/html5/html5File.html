@@ -61,12 +61,16 @@
 		xhr.upload.onprogress = function(){}
 
 		//状态码
-		302 //found 重定向
+		302 301 303 //found 重定向
+		307 //临时重定向
 		304 //not modified  资源未被修改
 		305 //use proxy 必须通过一个代理来访问资源
 		403 //forbidden  请求被服务器拒绝
 		404 //not found
 		503 //bad gateway  服务器现在不能提供服务  将来可能
+		415 //content-type 不支持
+		417 //请求头不符合要求
+
 
 		//缓存
 /**
