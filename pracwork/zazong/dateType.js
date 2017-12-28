@@ -151,3 +151,9 @@ arr1.keys()
 arr.values()
 arr.entries()
 arr.includes('4')
+
+
+//判断是否为数组
+arr instanceof Array
+arr.constructor === Array
+Object.prototype.toString.call(arr) === '[object Array]'
