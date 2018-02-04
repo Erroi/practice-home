@@ -118,6 +118,7 @@ var arr = new Array();    new Array(100);// undefined * 100
         0 in arr;  //false;
 
 Array.reduce((pre,cur,curIndex,arr)=>{return pre + cur},0);  //第二个参数0 为初始值。
+    [].reduceRight() //从右向左累加
 转为真正的数组的方法：
 A 、扩展运算符(...) 
 Math.min(...[2,5,3])  Math.min(2,5,3) //2
