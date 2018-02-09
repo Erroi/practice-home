@@ -5,7 +5,7 @@ b = {name: "andrew"};
 
 a === b; // false
 
-//对于引用类型，设置b=a，并没有创建新对象，而是创建了一个对其他对象的引用；只是将变量b指向a，当改变b的name属性时，同样改变了a的name属性
+//对于引用类型，(对象  数组  set  map)设置b=a，并没有创建新对象，而是创建了一个对其他对象的引用；只是将变量b指向a，当改变b的name属性时，同样改变了a的name属性
 var a = {name: "andrew"},
 b = a;
 
@@ -64,7 +64,8 @@ let num = new Number(2.3E7);  //23000000
 
 null === null; //true
 undefined === undefined; //true
-NaN != NaN
+NaN != NaN    
+Object.is(NaN,NaN) //true
 new Object != new Object;
 null == undefined;  //true
 

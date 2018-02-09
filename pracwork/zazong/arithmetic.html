@@ -98,7 +98,7 @@ function zeroDeline(){
 
 
 //4.创建数组方法
-var num = [];  num = [1,2,3];   num = new Array();  num = new Array(1,2,3) ;  num = new Array(10);
+var num = [];  num = [1,2,3];   num = new Array();  num = new Array(1,2,3);/**[1,2,3]**/  num = new Array(10);/**[10empty] **/ num = Array.of(3) //[3]  
 Array.isArray(num) //true
 arr.indexof('3');
 arr.reverse();  //数组倒叙
@@ -110,6 +110,8 @@ arr.forEach(fun)   //迭代器方法 输出值
 arr.every(fun)     //true false
 arr.some(fun)
 num.reduce(function(a,b){return a - b},0)   //.reduce() 执行函数结果的累加
+Array.reduce((pre,cur,curIndex,arr)=>{return pre + cur},0);  //第二个参数0 为初始值。
+    [].reduceRight() //从右向左累加
 arr.map(fun)   //生成新数组
 arr.filter(fun)  //生辰新数组
 
