@@ -61,6 +61,7 @@ let num = new Number(2.3E7);  //23000000
 (2.55).toFixed(1);   //2.5  失效
 (2.55 + 1e-14).toFixed(1); //2.6  矫正方法
 
+~~'2.58'  表示Math.floor()   //向下取整 
 
 null === null; //true
 undefined === undefined; //true
@@ -159,3 +160,82 @@ arr.includes('4')
 arr instanceof Array
 arr.constructor === Array
 Object.prototype.toString.call(arr) === '[object Array]'
+
+
+call、applay、bind
+
+call,applay 都属于 Function.prototype 的一个方法， 所以每个function对象实例，也就是每个方法都有call、applay属性。
+ obj.call(thisObj,arg1,arg2,arg3);
+ obj.applay(thisObj,[arg1,arg2,arg3]);
+将obj的属性和方法绑定到thisObj上，运行上下文this指向thisObj，或者说 thisObj继承了obj的方法和属性；
+
+使用场景：
+    将类数组可以使用数组的增删改查
+    let eleNodes = document.getElementsByTagName('p');
+    Array.prototype.slice.call(eleNodes);
+    //通过调用数组原型上的slice方法将类数组转换成数组，就具有了数组的所有方法
+
+    合并几个数组
+    var arr1 = [12,'ee','foo'];
+    var arr2 = ['Hoe',44];
+    Array.prototype.push.apply(arr1,arr2);     //立即执行
+
+    找出数组中的最小值
+    var nums = [2,4,5,1,34,62,4];
+    Math.max.apply(Math,nums)
+
+    验证是否是数组
+    Object.prototype.toString.call(obj) == '[object Array]'
+
+    唯一区别是apply接受的是数组参数，call接受的是连续参数。
+
+
+bind 和 call、applay的作用类似，都是改变this的指向，但
+bind()方法返回对象函数的引用，便于后面调用，他的this值传递给第一个参数，参数的bind的其他参数和原本参数。
+
+setTimeout 运行时 作用域通常是全局的，this指向window；
+
+    例：
+    this.x = 9;
+    var module = {
+        x:8,
+        getX:function(){
+            return this.x;
+        }
+    }
+    module.getX();   //8
+
+    var retrieveX = module.getX;
+    retrieveX();  //9; this 指向全局作用域；
+
+    var boundX = retrieveX.bind(module);
+    boundX();    //8
+
+三者区别
+    var obj = {
+        x:81
+    }
+    var foo = {
+        getX:function(){
+            return this.x;
+        }
+    }
+    console.log(foo.getX.bind(obj)())    // 81   bind绑定的时候非立即执行，只是函数的引用，回调的时候会执行
+    console.log(foo.getX.call(obj))   //81  立即执行
+    console.log(foo.getX.applay(obj))  //81  立即执行
+
+
+函数节流 throttle
+    对会频繁触发的事件做一些限制，让其每隔一段时间，或满足什么条件才触发。如resize ontouchmove事件
+
+    function throttle(func){
+        var timer;
+        return function(){
+            var context = this;
+            var args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                func.applay(context,args);    //setTimeout 运行环境是全局作用域，所以要绑定
+            },1000);
+        }
+    }
