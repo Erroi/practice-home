@@ -17,4 +17,12 @@ http://example.com/about
 使用window.localtion.hash记录，可兼容老式浏览器
 http://example.com/#/about   
 
-每一个router组件创建了一个history对象，用来记录当前路径（history.location）,上一步也存储在
+每一个router组件创建了一个history对象，用来记录当前路径（history.location）,上一步也存储在堆栈中。
+history.push()      <Link/>  重新渲染视图，不会导致浏览器刷新；
+history.replace()    <Redirect/>
+
+
+三、'/'同时匹配'/'和'/category'。因此，所有路由都匹配并被渲染。我们该如何避免呢？应该给 path='/'的路由传递exact= {true}props：
+
+`<Route exact={true} path="/" component={Home}/>`
+

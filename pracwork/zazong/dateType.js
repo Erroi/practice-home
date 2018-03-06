@@ -123,6 +123,7 @@ Array.reduce((pre,cur,curIndex,arr)=>{return pre + cur},0);  //第二个参数0 
 转为真正的数组的方法：
 A 、扩展运算符(...) 
 Math.min(...[2,5,3])  Math.min(2,5,3) //2
+Math.max(...[2,3,6,1,4,2])
 //合并数组
 arr1.concat(arr2,arr3);
 [...arr1,...arr2,...arr3];
