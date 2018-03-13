@@ -69,7 +69,7 @@
 Function.prototype.bind = function() {
     var self = this,
         context = [].shift.call(arguments),
-        args = [].slice.call(arguments);
+        args = [].slice.call(arguments);     //转为数组    // rest参数的写法，numbers就是数组  const sortNumbers = (...numbers) => numbers.sort();
     return function() {
         return self.apply(context, [].concat.call(args, [].slice.call(arguments)));
     };
@@ -85,3 +85,24 @@ var func = function(a, b, c) {
 }.bind(obj, 1, 2);
 
 func(3);
+
+
+var x = 1;
+function foo(x, y = function() { x = 2; }) {
+x = 3;
+y();
+console.log(x);
+}
+
+foo() // 2
+x // 1
+
+var x = 1;
+function foo(x, y = function() { x = 2; }) {
+var x = 3;
+y();
+console.log(x);
+}
+
+foo() // 3
+x // 1

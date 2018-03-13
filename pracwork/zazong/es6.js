@@ -84,9 +84,19 @@ B.prototype.__proto__ === A.prototype  //true
 	3 通过call() apply()调用一个函数时，只是传入参数而已，与this没有影响。
 	4 不绑定Arguments对象，所以arguments[0]无用，可以使用rest表达式来代替arguments对象。
 		var f = (...args)=> args[0];
-	5 不能使用new操作符
+	5 不能使用new操作符，不可以当做构造函数，
 	6 没有prototype属性。
 
+	function foo() {
+		setTimeout(() => {
+		  console.log('id:', this.id);
+		}, 100);
+	  }
+	  
+	  var id = 21;
+	  
+	  foo.call({ id: 42 });
+	  // id: 42   如果是普通函数，执行时this应该指向全局对象window，这时应该输出21。但是，箭头函数导致this总是指向函数定义生效时所在的对象（本例是{id: 42}），所以输出的是42
 
 
 字符串方法
