@@ -30,7 +30,7 @@ console.log(isPalindrome('ollo'));
 
 
 
-//2.递归计算数字的阶乘  5!=5 * 4 * 3 * 2 * 1
+//2.递归计算数字的阶乘  5!=5 * 4 * 3 * 2 * 1    复杂度O(n)
 function factorial(n) {
     if (n == 0) {
         return 1;
@@ -51,6 +51,15 @@ function fact(n){
 	return pro;
 }
 console.log(factorial(5))
+
+// 尾递归 复杂度O(1)
+function factorialTail(n,total = 1){
+    if(n === 1) return total;
+    return factorialTail(n - 1,n * total);
+}
+
+console.log(factorialTail(5));   
+
 
 //概念：栈：一种后入先出的数据结构 last in first out ,入栈使用push(),出战使用pop()
 
