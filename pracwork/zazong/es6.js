@@ -54,12 +54,13 @@ self1.hasOwnProperty('x') //true  判断x是否为self1实力对象的自身属�
 self1.hasOwnProperty('y')  //true
 self1.hasOwnProperty('toString')  //false
 self1.__proto__.hasOwnProperty('toString')  //true  toString方法属于其原型链上的方法
-obj.instanceof(Self)   //判断obj是否为self对象的实例
+obj instanceof Self   //判断obj是否为self对象的实例
 
 
 class 的继承 extends 
 1.ES6中通过extends实现class类的继承，class ColorPoint extends Point{}
-2.constructor()方法中的super()解析：在ES6的继承机制是先创建父类的实力对象this，所以需要先跳用super()方法返回父类实例，才可以使用 this 关键字。
+2.constructor()方法中的super()解析：在ES6的继承机制是，子类没有自己的this对象，而是继承父类的this，所以需要先跳用super()方法返回父类实例，才可以使用 this 关键字，用子类的构造函数修改this,但这个this指向的是子类B，相当于 A.prototype.constructor.call(this)。
+父类的静态方法也会被子类似继承
 class ColorSelf extends Self {
 	constructor(x,y,color) {
 		this.color = color; //ReferenceError
@@ -67,6 +68,10 @@ class ColorSelf extends Self {
 		this.color = color;  //正确
 		
 	}
+
+	toString(){
+		super.toString()    //调用父类的toString()方法  , 只能取到父类原型对象上的方法，而实例对象上的属性取不到。
+	}  
 } 
 
 
@@ -77,6 +82,9 @@ class A{}
 class B extends A{}
 B.__proto__ === A   //true
 B.prototype.__proto__ === A.prototype  //true
+
+判断一个类是否继承了另一个类
+Object.getPrototypeOf(ColorSelf) === Self;   //true
 
 箭头函数：()=>{}
 特点1  不会创建this，不需要绑定this，它使用的是上一级执行上下文的this。

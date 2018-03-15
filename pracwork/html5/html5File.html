@@ -77,6 +77,7 @@
 1、Exprires: Expires是Web服务器响应消息头字段，在响应http请求时告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。
 2、Cache-Control: Cache-Control与Expires的作用一致，都是指明当前资源的有效期，控制浏览器是否直接从浏览器缓存取数据还是重新发请求到服务器取数据。  private max-age=XX no-cache
 只不过Cache-Control的选择更多，设置更细致，如果同时设置的话，其优先级高于Expires。
+no-cache  是取得缓存需要跟服务器校验，no-store 不缓存
 3、Last-Modified/If-Modified-Since：Last-Modified/If-Modified-Since要配合Cache-Control使用。
 Last-Modified：标示这个响应资源的最后修改时间。
 If-Modified-Since：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Last-Modified声明，则再次向web服务器请求时带上头 If-Modified-Since，表示请求时间。

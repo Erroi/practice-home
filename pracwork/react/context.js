@@ -46,3 +46,18 @@ function D(props,context){
 D.contextTypes = {
     user:React.PropTypes.object.isRequired
 }
+
+
+
+//性能优化  浅比较
+shouldComponentUpdate(nextProps,nextState){
+    let isChanged = false;
+    for (let key in nextState) {
+        if (this.state[key] !== nextState[key]) {
+            console.log(`${key} is changed`)
+            isChanged = true;
+            break;
+        }
+    }
+    return isChanged;
+}

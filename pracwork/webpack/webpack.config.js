@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    context:__dirname,  //context定义环境上下文
+    context: __dirname,  //context定义环境上下文
     entry: path.resolve(__dirname, 'app', 'main.js'),
                 //多页面应用
                 entry:{

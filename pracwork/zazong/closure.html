@@ -70,7 +70,7 @@
                 }
             }
         }
-        alert(object.getNameFunc()()); //"the Window"
+        alert(object.getNameFunc()()); //"undefined"
         //测试二
         var name = "this Window";
         var object = {
@@ -83,7 +83,7 @@
                 }
             }
         }
-        alert(object.getNameFunc()()); //"the Object"
+        alert(object.getNameFunc()()); //"my Object"
 
         //    //测试三
         var oli = document.getElementsByTagName('li');

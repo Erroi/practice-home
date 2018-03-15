@@ -61,7 +61,7 @@ let num = new Number(2.3E7);  //23000000
 (2.55).toFixed(1);   //2.5  失效
 (2.55 + 1e-14).toFixed(1); //2.6  矫正方法
 
-~~'2.58'  表示Math.floor()   //向下取整 
+~~'2.58'  表示 Math.floor()   //向下取整 
 
 null === null; //true
 undefined === undefined; //true
