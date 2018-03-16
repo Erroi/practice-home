@@ -147,6 +147,52 @@ function bubbleSort(numArr){
     }
 }
 
+//选择排序  每次选择最小的，替换到前面   时间复杂度 n^2 n的平方
+function selectionSort(arr){
+    for(let i = 0;i < arr.length - 1;i++){
+        let index = i;
+        for(let j = i + 1;j < arr.length; j++){
+            if(arr[index] > arr[j]){
+                index = j;
+            }
+        }
+        let temp = arr[index];
+        arr[index] = arr[i];
+        arr[i] = temp;
+    }
+    return arr;
+}
+
+//快排  找一个基数，将所有值与这个基数比较 小于的放 数组二分之一的左边，大于的放 1/2数组 的右边；再从1/2数组开始选个基数。。。
+//时间复杂度 n * log n
+function quickSort(arr){
+    if(arr.length <= 1){
+        return arr;
+    };
+    let empty = arr[0];
+    let left = [];
+    let right = [];
+    for (let i = 1; i < arr.length;i++){
+        if(arr[i] > empty){
+            right.push(arr[i]);
+        }else{
+            left.push(arr[i]);
+        }
+    };
+    return quickSort(left).concat([empty],quickSort(right));
+}
+
+//归并排序 将数组1/2，左边再1/2，。。。直至小于3停止分裂；开始从左向右比较插入，
+function mergeSort(arr){
+    if(arr.length <= 2){
+        return arr;
+    }
+    var fenArr = function(arr){
+        while(i)
+    }
+} 
+
+
 </script>
 
 </html>
