@@ -106,3 +106,4 @@ console.log(x);
 
 foo() // 3
 x // 1
+
