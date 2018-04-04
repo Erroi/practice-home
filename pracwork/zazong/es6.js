@@ -60,7 +60,36 @@ obj instanceof Self   //判断obj是否为self对象的实例
 class 的继承 extends 
 1.ES6中通过extends实现class类的继承，class ColorPoint extends Point{}
 2.constructor()方法中的super()解析：在ES6的继承机制是，子类没有自己的this对象，而是继承父类的this，所以需要先跳用super()方法返回父类实例，才可以使用 this 关键字，用子类的构造函数修改this,但这个this指向的是子类B，相当于 A.prototype.constructor.call(this)。
+
+	
 父类的静态方法也会被子类似继承
+//父类
+class Foo{
+	static classMethod(){
+		return 'hello';
+		this.propMethod();  //this指向的是类Foo，而不是实例
+	}
+	propMethod(){
+		console.log('hello')
+	}
+}
+
+Foo.classMethod() //'hello' ,静态方法可以直接在Foo类上调用；其他的方法是定义在原型上不能直接调用
+Foo.propMethod() //typeError
+//实例函数  不能继承静态方法
+var foo = new Foo();
+foo.classMethod()  //typeError 静态方法不能被实例继承
+foo.propMethod();  //hello
+//子类  可以调用父类的静态方法
+class Bar extends Foo{
+	static classMethod(){
+		return super.classMethod() + ',too'
+	}
+}
+Ber.classMethod() //hello,too
+
+
+
 class ColorSelf extends Self {
 	constructor(x,y,color) {
 		this.color = color; //ReferenceError
