@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     context: __dirname,  //context定义环境上下文
-    entry: path.resolve(__dirname, 'app', 'main.js'),
+    entry: path.resolve(__dirname, 'app', 'main.js'),      //也可以定义一组数组[]，指会创建多个主入口依赖文件一起注入，并将依赖导向到一个chunk
                 //多页面应用
                 entry:{
                     page1:'page1.js',

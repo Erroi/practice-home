@@ -143,3 +143,20 @@ Object.getPrototypeOf(ColorSelf) === Self;   //true
 'hello'.includes('he',2)  //从第2位开始到结束位置
 'hello'.endsWith('he') //false   可传第二个参数，
 'hello'.endsWith('he',2) //表示前两个字符，是否以he结尾
+
+
+//浅拷贝一个对象到另一个对象，
+1 Object.assign({},obj);   //浅拷贝 原对象的所有信息，除了 getter、setter
+2 Object.getOwnPropertyDescriptors(car,'prop');  //返回给定对象的说有属性的详细信息。 可用于 浅拷贝原始对象包括getter、setter
+	  var car = {
+		  name:'BMA',
+		  price:1000,
+		  set discount(x){
+			  this.d = x;
+		  },
+		  get discount(){
+			  return this.d;
+		  }
+	  }
+	  const ElectricCar2 = Object.defineProperties({},Object.getOwnPropertyDescriptors(Car));  //拷贝Car到electricCar2
+	  console.log(Object.getOwnPropertyDescriptors(ElectricCar2,'discount'));
