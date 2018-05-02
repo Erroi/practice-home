@@ -256,6 +256,10 @@ O.RegExp 正则
 			ignoreCase  i
 			multiline   m 换行匹配
 
+
+			test.replace(/\d/g,'[$&]');  // "abc[3][4][5]efgabcab"
+			// 若是有分组则按照$1, $2, $3的形式进行引用，而 $& 则表示的是整个正则表达式匹配的内容。
+
 p.对象Object属性：Object.getOwnPropertyDescriptor(Object,'prototype');  返回Object的prototype属性。
 创建属性的一种方式：Object.defineProperty(cat,'price',{enumerable:false,value:1000}) cat的不可枚举属性price，值为1000
 对象属性的set 、 get方法：
