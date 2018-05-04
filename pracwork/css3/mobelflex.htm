@@ -20,7 +20,10 @@
     }
     @media all and (min-width:800px){
     	.main{flex:3 0px;}     /*flex-grow|flex-shrink|flex-basis  默认0 1 auto      若想设在同一行：把本元素设置flex：int 0px*/
-    	.aside-1{order:1;}
+                                /*flex-grow 放大比例 默认0，即使有剩余空间也不放大*/
+                                /*flex-shrink 缩小比例 默认1，空间不足则自动缩小，0不缩小*/
+                                /*flex-basic 占据的基础空间，默认为auto，项目本来大小，再根据剩余空间缩放*/
+        .aside-1{order:1;}
     	.main{order:2;}
     	.aside-2{order:3;}    /*flex-grow:子项目所占剩余空间的比例，默认0*/
     	.footer{order:4;}     /*order:设置伸缩项目在文档流中出现的顺序*/
@@ -59,7 +62,29 @@
         <aside class="aside aside-2">Aside 2</aside>
         <footer class="footer">Footer</footer>
     </div>
-    <script src="debuggap.js" type="text/javascript"></script>
+    <script src="debuggap.js" type="text/javascript">
+/*
+#first {
+    flex: 1 1 400px;
+    }
+        
+    #second {
+    flex: 2 3 600px;
+    }
+        
+    #third {
+    flex: 1 2 400px;
+    }	
+    flex-shrink称为收缩比率。这个值只有伸缩项目在没主轴方向溢出伸缩容器才会发挥作用。他们充当比例值，但这回指的是溢出量，将这个溢出量按比例分配给每个伸缩项目，用于防止伸缩容器溢出。
+
+    比如说，我们伸缩容器沿主轴方向宽度是1100px，按照上面的示例代码计算，我们的伸缩项目会超出300px(伸缩项目沿主轴方向总值为1400px)，这个时候通过flex-shrink收缩他们：
+
+    第一个伸缩项目将得到溢出量的六分之一，也就是50px，这个时候他的值为350px(在当初的基础上减少50px)。
+    第二个伸缩项目将得到溢出量的六分之三，也就是150px，这个时候他的值为450px(在当初的基础上减少150px)。
+    第三个伸缩项目将得到溢出的六分之二，就就是100px，这个时候他的值为300px(在当初的基础 上减少100px)。
+*/
+    </script>
+    
 </body>
 
 </html>
