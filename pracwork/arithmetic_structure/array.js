@@ -1,14 +1,13 @@
 /**
  * Created by qiany on 17/12/24.
  */
-// console.log('lllll');
-// function weektime() {
-//     this.dataSource = [];
-//     this.addnum = 50;
-//
-// }
-// weektime();
-// console.log(this.addnum);
+console.log('lllll');
+function weektime() {
+    this.dataSource = [];
+    this.addnum = 50;
+}
+weektime();
+console.log(this.addnum);  //undefined
 
 // if([]==false){console.log(1)};
 // if({}==false){console.log(2)};
@@ -63,47 +62,51 @@
 // }
 //
 // console.warn(getSet(arr, 3, 0));
+//
+//
+// //实现bind的功能
+// Function.prototype.bind = function() {
+//     var self = this,
+//         context = [].shift.call(arguments),
+//         args = [].slice.call(arguments);     //转为数组    // rest参数的写法，numbers就是数组  const sortNumbers = (...numbers) => numbers.sort();
+//     return function() {
+//         return self.apply(context, [].concat.call(args, [].slice.call(arguments)));
+//     };
+// };
+//
+// // 测试
+// var obj = {
+//     name: "ligang"
+// };
+// var func = function(a, b, c) {
+//     console.log(this.name);
+//     console.log([a, b, c])
+// }.bind(obj, 1, 2);
+//
+// func(3);   //ligang   [1,2,3]
 
-
-//实现bind的功能
-Function.prototype.bind = function() {
-    var self = this,
-        context = [].shift.call(arguments),
-        args = [].slice.call(arguments);     //转为数组    // rest参数的写法，numbers就是数组  const sortNumbers = (...numbers) => numbers.sort();
-    return function() {
-        return self.apply(context, [].concat.call(args, [].slice.call(arguments)));
-    };
-};
-
-// 测试
-var obj = {
-    name: "ligang"
-};
-var func = function(a, b, c) {
-    console.log(this.name);
-    console.log([a, b, c])
-}.bind(obj, 1, 2);
-
-func(3);
-
-
+//
 var x = 1;
 function foo(x, y = function() { x = 2; }) {
+    console.log(x)  //undefined
 x = 3;
+console.log(x)   //3
 y();
-console.log(x);
+console.log(x);     //2
 }
 
 foo() // 2
-x // 1
-
-var x = 1;
-function foo(x, y = function() { x = 2; }) {
-var x = 3;
-y();
-console.log(x);
-}
-
-foo() // 3
-x // 1
+console.log(x) // 1
+//
+// var x = 1;
+// function foo(x, y = function() { x = 2; }) {
+//     console.log(x)  //undefined
+// var x = 3;
+// console.log(x);      //3
+// y();
+// console.log(x);        //3
+// }
+//
+// foo() // 3
+// console.log(x) // 1
 

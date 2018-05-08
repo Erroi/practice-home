@@ -17,94 +17,95 @@
 //     console.log(i,random,result);
 // }
 
-// var z = 10;
-// function foo(){
-//     console.log(z);
-// }
-// (function(funArg){
-//     var z = 20;
-//     funArg();
-// })(foo);
-
+var z = 10;
+function foo(){
+    console.log(z);
+}
+(function(funArg){
+    var z = 20;
+    funArg();
+})(foo); //10
+foo()  //10
 
 //
-// var data = [];
-// for(var k = 0; k < 3; k++){
-//     data[k] = function(){
-//         console.log(k);
-//     };
-// }
-// data[0]();
-// data[1]();
-// data[2]();
+var data = [];
+for(var k = 0; k < 3; k++){
+    data[k] = function(){
+        console.log(k);
+    };
+}
+data[0]();
+data[1]();
+data[2]();
+//3 3 3
 
 
-// var a = 100;
-// function testResult(){
-//     console.log(a);
-//     var b = 2 * a;
-//     var a = 200;     //变量提升
-//     var c = a / 2;
-//     console.log(b);
-//     console.log(c);
-// }
-// testResult();
+var a = 100;
+function testResult(){
+    console.log(a);
+    var b = 2 * a;
+    var a = 200;     //变量提升
+    var c = a / 2;
+    console.log(b);
+    console.log(c);
+}
+testResult();    // undefined  NaN  100
 
-// var name = "the Window";
-// var object = {
-//     name: "my Object",
-//
-//     getNameFunc: function () {
-//         return function () {
-//             return this.name;
-//         }
-//     },
-//     getName:function () {
-//         return this.name;
-//     }
-// }
-// console.log(object.getNameFunc()());  //undefined
-// console.log(object.getName());        //my Object
+var name = "the Window";
+var object = {
+    name: "my Object",
+
+    getNameFunc: function () {
+        return function () {
+            return this.name;
+        }
+    },
+    getName:function () {
+        return this.name;
+    }
+}
+console.log(object.getNameFunc()());  //undefined
+console.log(object.getName());        //my Object
 
 
-// Object.keys(Array.apply(null,{length:100}))
+Object.keys(Array.apply(null,{length:100}))
 
-// function throttle(func) {
-//     var timer;
-//     return function () {
-//         var context = this;
-//         var arg = arguments;
-//         console.log(arg)
-//         clearTimeout(timer);
-//         timer = setTimeout(function () {
-//             func.apply(context,arg);
-//         },100)
-//     }
-// }
-// a = 9999;
-// throttle(function(){
-//     console.log('333')
-// })();
-//
+function throttle(func) {
+    var timer;
+    return function () {
+        var context = this;
+        var arg = arguments;
+        console.log(arg)
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            func.apply(context,arg);
+        },100)
+    }
+}
+a = 9999;
+throttle(function(){
+    console.log('333')
+})();
+
 var arr1 = [3,2,5,9,23,45,12,4,65,34,87,1,24,45];
-// function quickSort(arr) {
-//     if(arr.length <= 1){
-//         return arr;
-//     }
-//     var empty = arr[0];
-//      var left = [];
-//      var right = [];
-//     for(var i = 1;i<arr.length;i++){
-//         if(arr[i] < empty){
-//             left.push(arr[i]);
-//         }else{
-//             right.push(arr[i]);
-//         }
-//     };
-//     return quickSort(left).concat([empty],quickSort(right));
-// }
-//
-// console.log(quickSort(arr1));
+function quickSort(arr) {
+    if(arr.length <= 1){
+        return arr;
+    }
+    var empty = arr[0];
+     var left = [];
+     var right = [];
+    for(var i = 1;i<arr.length;i++){
+        if(arr[i] < empty){
+            left.push(arr[i]);
+        }else{
+            right.push(arr[i]);
+        }
+    };
+    return quickSort(left).concat([empty],quickSort(right));
+}
+
+console.log(quickSort(arr1));
 
 //快排
 function sortQuick(arr, start, end) {

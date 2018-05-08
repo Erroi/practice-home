@@ -1,4 +1,5 @@
 //高级组件  https://react.bootcss.com/react/docs/higher-order-components.html
+// https://juejin.im/post/5914fb4a0ce4630069d1f3f6
 // 方法1 属性代理  props proxy 原始组件作为参数被高级组件调用，使得通过高级组件来传递props，达到原始组件具备高级组件对他的修饰
 import React,{Component} from 'React';
 const MyContainer = (WrappedComponent) => {
@@ -24,7 +25,8 @@ const MyContainer = (WrappedComponent) => {
                     onChange:this.onNameChange,
                 }
             }
-            return <WrappedComponent {...this.props} {...newProps}/>
+            return <WrappedComponent {...this.props} {...newProps}
+            />
         }
     }
 }
