@@ -8,5 +8,5 @@ export default function compose(...funcs,initFunc){
     }
 
     // return funcs.reduce((pre,cur)=>cur(pre),initFunc)
-    return (...args)=> funcs.reduceRight((pre,cur)=>cur(pre),initFunc);
+    return (...funcs)=> funcs.reduceRight((pre,cur)=>cur(pre),initFunc);
 }
