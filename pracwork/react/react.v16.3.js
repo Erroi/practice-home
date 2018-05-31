@@ -434,8 +434,101 @@ componentDidCatch (error: Error, errorInfo: React.ErrorInfo) {
 }
 
 
-//Render Props
+//Render Props: value is a function that returns a react element , share the state between component
 <DataProvider render={data => (
   <h1>Hello {data.target}</h1>
 )}/>
-//不能在pureComponent里用
+//例
+class Cat extends React.Component {
+  render() {
+    const mouse = this.props.mouse;
+    return (
+      <img src="/cat.jpg" style={{ position: 'absolute', left: mouse.x, top: mouse.y }} />
+    );
+  }
+}
+
+class Mouse extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { x: 0, y: 0 };
+  }
+  
+  handleMouseMove(event) {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
+  
+  render() {
+    return (
+      <div style={{ height: '100%' }} onMouseMove={this.handleMouseMove}>
+
+        {/*
+          Instead of providing a static representation of what <Mouse> renders,
+          use the `render` prop to dynamically determine what to render.
+        */}
+        {this.props.render(this.state)}
+      </div>
+    );
+  }
+}
+
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Move the mouse around!</h1>
+        <Mouse render={mouse => (
+          //这里就可以拿到（x,y）state
+          <Cat mouse={mouse} />
+        )}/>
+      </div>
+    );
+  }
+}
+
+//转成HOC
+function withMouse(Component) {
+  return class extends React.Component {
+    render(){
+      reutrn (
+        <Mouse render={(mouse)=>(
+          <Component {...this.props} mouse={mouse}/>
+        )}/>
+      )
+    }
+  }
+}
+//note
+<Mouse children={mouse => (
+  <p>The mouse position is {mouse.x}, {mouse.y}</p>
+)}/>
+<Mouse>
+  {mouse => (
+    <p>The mouse position is {mouse.x}, {mouse.y}</p>
+  )}
+</Mouse>
+Mouse.propTypes = {
+  children: PropTypes.func.isRequired
+};
+//不能在React.pureComponent{}里用,因为每次render会生成新的值，而浅比较会对新值返回false
+//可以改写成
+class MouseTracker extends React.Component {
+  // Defined as an instance method, `this.renderTheCat` always
+  // refers to *same* function when we use it in render
+  renderTheCat(mouse) {
+    return <Cat mouse={mouse} />;
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Move the mouse around!</h1>
+        <Mouse render={this.renderTheCat} />
+      </div>
+    );
+  }
+}
