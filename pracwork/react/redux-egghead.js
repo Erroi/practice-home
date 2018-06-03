@@ -201,8 +201,8 @@ const AddTodo = (props, { store }) => {    //store = context.store
         <div>
             <input ref={node => input = node}/>
             <button onClick={()=>{
-                store.dispatch({
-                    type: 'ADD_TODO',
+                store.dispatch({                // 这里写成一个action
+                    type: 'ADD_TODO',           //const addToDo = (text) => ({type:'ADD_TODO',id:nextTodoId++,text})
                     id: nextTodoId++,
                     text: input.value
                 })
@@ -224,11 +224,7 @@ let AddTodo = ({ dispatch }) => {    //stateA和dispatchA是从props上取的
         <div>
             <input ref={node => input = node}/>
             <button onClick={()=>{
-                store.dispatch({
-                    type: 'ADD_TODO',
-                    id: nextTodoId++,
-                    text: input.value
-                })
+                dispatch(addToDo)
                 input.value = ''
             }}>
                 Add Todo
@@ -239,15 +235,16 @@ let AddTodo = ({ dispatch }) => {    //stateA和dispatchA是从props上取的
 // AddTodo = connect(state => {stateA:xxxx},dispatch => {dispatchA:dispatch(xxx)})(AddTodo)  //将dispatch作为props赋给了AddTodo
 connect(null,dispatch => ({dispatch}))(AddTodo)  //或写成 AddTodo = connect()(AddTodo)  
 
+// Link
 const mapStateToLinkProps = (state,ownProps) => ({
     active: ownProps.filter === state.visibilityFilter
 })
-
 const mapDispatchToLinkProps = (dispatch,ownProps) => ({
-    onClick: ()=> {dispatch({
-        type: 'SET_VISIBILITY_FILTER',                                 //这里可以写成action-create   const setVisibilityFilter=(filter)=>({type:'SET_VISIBILITY_FILTER',filter})
-        filter: ownProps.filter
-    })}
+    onClick: ()=> {dispatch(setVisibilityFilterAction(ownProps.filter))}
+})
+const setVisibilityFilterAction = (filter) => ({
+    type: 'SET_VISIBILITY_FILTER',
+    filter
 })
 const FilterLink = connect(mapStateToLinkProps,mapDispatchToLinkProps)(Link)
 
