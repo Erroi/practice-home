@@ -532,3 +532,28 @@ class MouseTracker extends React.Component {
     );
   }
 }
+
+
+// 生命周期
+static getDerivedStateFromProps(nextProps, prevState)  //每次实例化之后都会被调用
+
+//状态更改之前捕获，并把返回的值传给didUpdate
+getSnapshotBeforeUpdate(prevProps, prevState) {
+  // Are we adding new items to the list?
+  // Capture the scroll position so we can adjust scroll later.
+  if (prevProps.list.length < this.props.list.length) {
+    const list = this.listRef.current;
+    return list.scrollHeight - list.scrollTop;
+  }
+  return null;
+}
+
+componentDidUpdate(prevProps, prevState, snapshot) {
+  // If we have a snapshot value, we've just added new items.
+  // Adjust scroll so these new items don't push the old ones out of view.
+  // (snapshot here is the value returned from getSnapshotBeforeUpdate)
+  if (snapshot !== null) {
+    const list = this.listRef.current;
+    list.scrollTop = list.scrollHeight - snapshot;
+  }
+}
