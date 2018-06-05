@@ -535,6 +535,49 @@ class MouseTracker extends React.Component {
 
 
 // 生命周期
+//Mounting
+constructor(props){
+  super(props)
+}
+static getDerivedStateFromProps(nextProps,prevState)
+componentWillMount()
+render()
+componentDidMount()
+
+//Updating
+componentWillReceiveProps(nextProps)
+static getDerivedStateFromProps()
+shouldComponentUpdate(nextProps,nextState)  //建议用pureComponent,也不建议在此做深度比较
+componentWillUpdate()
+render()
+getSnapshotBeforeUpdate(prevProps,prevState)
+componentDidUpdate(prevProps,prevState,snapshot)
+
+//Unmounting
+componentWillUnmount()
+
+//Error Handling
+componentDidCatch(err,info)
+
+//API
+setState((prevState,props)=>{
+  return {counter: prevState.counter + props.step}
+},()=>{})
+forceUpdate(callback)
+
+// class Properties
+defaultProps
+displayName
+
+//Instance Properties
+props
+state
+
+
+
+
+
+
 static getDerivedStateFromProps(nextProps, prevState)  //每次实例化之后都会被调用
 
 //状态更改之前捕获，并把返回的值传给didUpdate
