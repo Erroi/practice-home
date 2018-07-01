@@ -137,3 +137,5 @@ function testnew(){
 }
 testnew()();  //4
 
+Object.keys(Array.from({length:100}))
+

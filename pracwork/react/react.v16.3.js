@@ -83,7 +83,7 @@ function ListOfTenThings() {
 class MyComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.myRef = React.creactRef();  //创建ref
+    this.myRef = React.createRef();  //创建ref
   }
   render() {
     return <div ref={this.myRef} />;

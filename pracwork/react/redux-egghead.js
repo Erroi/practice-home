@@ -170,12 +170,12 @@ ReactDOM.render(
 
 
 import { connect } from 'react-redux';   // 连接redux和react；将store的state和dispatch传给mapStateToProps和mapDispatchToProps，并经过处理定义变量当做组件的props。就不需要用this.context.store获取了
-const mapStateToProps = (state) => {     //此state 是store.getState()
+const mapStateToProps = (state,ownProps) => {     //此state 是store.getState()
     return {
-        todos: getVisibleTodos(state.todos,state.visibilityFilter)
+        todos: getVisibleTodos(state.todos,state.visibilityFilter)   //筛选出需要的state
     }
 }
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch,ownProps) => {
     return {
         onTodoClick: (id) => {
             dispatch({
@@ -236,15 +236,28 @@ let AddTodo = ({ dispatch }) => {    //stateA和dispatchA是从props上取的
 connect(null,dispatch => ({dispatch}))(AddTodo)  //或写成 AddTodo = connect()(AddTodo)  
 
 // Link
+// ownProps 当state变化或ownProps变化时，mapStateToProps都会被调用生成一个新的stateProps(在与ownProps merge后)更新给组件
 const mapStateToLinkProps = (state,ownProps) => ({
     active: ownProps.filter === state.visibilityFilter
 })
+// 当ownProps变化的时候，该函数也会被调用，生成一个新的dispatchProps,(在与新的stateProps,ownProps merge后)更新给组件
 const mapDispatchToLinkProps = (dispatch,ownProps) => ({
     onClick: ()=> {dispatch(setVisibilityFilterAction(ownProps.filter))}
 })
+// action必须在store上调用dispatch方法，为了不让组件感知到dispatch的存在，改写成可直接被调用的函数
+// redux本身提供了bindActionCreators 函数，来将action包装成直接可被调用的函数
+import { bindActionCreators } from 'redux'
+const mapDispatchToLinkProps = (dispatch,ownProps) => {
+    return bindActionCreators({
+        onClick: setVisibilityFilterAction(ownProps.filter)
+    })
+}
 const setVisibilityFilterAction = (filter) => ({
     type: 'SET_VISIBILITY_FILTER',
     filter
 })
 const FilterLink = connect(mapStateToLinkProps,mapDispatchToLinkProps)(Link)
+
+//不管是 stateProps 还是 dispatchProps，都需要和 ownProps merge 之后才会被赋给 MyComp。connect 的第三个参数就是用来做这件事。通常情况下，你可以不传这个参数，connect 就会使用 Object.assign 替代该方法。)
+connect(null,null,mergeProps(stateProps,dispatchProps,ownerProps)
 
