@@ -103,3 +103,31 @@ let strLength: number = (<string>someValue).length;
             //as语法
 let someValue: any = "this is a string";
 let strLength: number = (someValue as string).length;
+
+// 接口
+    // 只读属性
+    interface Point {
+        readonly x: number;
+        readonly y: number;
+    }
+    let p1: Point = { x: 10, y: 20 };
+    p1.x = 5; // error!
+
+// 接口继承类 继承类extends 继承接口implements
+class Control {
+    private state: any;
+}
+interface SelectableControl extends Control {
+    select(): void;
+}
+class Button extends Control implements SelectableControl {
+    select() {}
+}
+class TextBox extends Control {
+    select() {}
+}
+class Image implements SelectableControl { // 类“Image”错误实现接口“SelectableControl”。类型“Image”中缺少属性“state”。
+    select() {}
+}
+                // SelectableControl包含了Control的所有成员，包括私有成员state，因为state是私有成员，所以只能是Control的子类才能实现SelectableControl接口。
+                // 因为只有Control的子类才能够拥有一个声明于Control的四哟成员state
