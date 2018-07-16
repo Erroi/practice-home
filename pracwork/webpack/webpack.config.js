@@ -107,3 +107,126 @@ module.exports = {
 		inline:true                      //时时刷新
 	},
 };
+
+
+// "start": "webpack-dev-server --config webpack.config.dev.js --mode development",
+// "build": "webpack --config webpack.config.pro.js --mode production --progress --colors"
+  
+const path = require("path");
+let webpack =require("webpack");
+
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const SRC_PATH = path.resolve(__dirname, "src");
+const DIST_PATH = path.resolve(__dirname, "dist");
+const STATIC = path.resolve(SRC_PATH,"static");
+
+module.exports = {
+    entry:{
+        main:path.join(SRC_PATH,"index.js"),
+        vendor:[
+            "react",
+            "react-dom",
+            "react-router",
+            "react-router-dom",
+            "lodash",
+            "immutable",
+            "graphql.js",
+        ]
+    },
+    output: {
+        path:path.join(DIST_PATH),
+        filename: "[name].[chunkhash].js",
+        // publicPath: './',
+        // chunkFilename: '[name].[chunkhash].chunk.js',
+    },
+    module: {
+        rules: [{
+            test: /\.js|jsx|ts$/,
+            exclude: /node_modules/,
+            use: "babel-loader",
+        }, {
+            test: /\.css$/,
+            // exclude: /node_modules/,
+            use: ["style-loader", "css-loader"]
+        }, {
+            test: /\.(png|jpe?g|gif|svg)$/,
+            use: [{
+                loader: 'url-loader',
+                options: {
+                    limit: 10480,
+                    name:'img/[name]-[hash:6].[ext]'
+                }
+            }]
+        }, {
+            test:[/\.less/],
+            use:[
+                {loader:`less-loader`}
+            ]
+        },{
+            test: /\.scss$/,
+            // exclude: /node_modules/,
+            // use:ExtractTextPlugin.extract({
+                use:[{
+                    loader:'style-loader',
+                },{
+                    loader:"css-loader",
+                    options:{
+                        importLoaders: 1,
+                        modules:true
+                    }
+                },{
+                    loader: 'postcss-loader',
+                }],
+                // publicPath:path.join(site,"resources")
+            // })
+        }]
+    },
+    resolve:{
+        extensions: ['.js','.jsx',".ts",".tsx"],
+        alias:{
+            com:path.resolve(SRC_PATH,"components"),
+            utils:path.join(STATIC,"utils"),
+            config:path.join(SRC_PATH,"config"),
+            static:STATIC,
+        }
+    },
+    plugins: [
+        // new ExtractTextPlugin({
+        //     filename: "style.css",
+        //     disable: false,
+        //     allChunks: true
+        // }),
+        // new webpack.optimize.ModuleConcatenationPlugin(),
+        new HtmlWebpackPlugin({
+            filename:"index.html",
+            title:"项目管理平台",
+            template:path.join(SRC_PATH,"index.html"),
+            hash:false,
+            inject:true,
+        }),
+        // new webpack.DefinePlugin(Object.assign({
+        //     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        // })),
+    ],
+    // optimization: {
+    //     splitChunks: {
+    //         cacheGroups: {
+    //             commons: {
+    //                 chunks: 'initial',
+    //                 minChunks: 2, maxInitialRequests: 5,
+    //                 minSize: 0
+    //             },
+    //             vendor: {
+    //                 test: /node_modules/,
+    //                 chunks: 'initial',
+    //                 name: 'vendor',
+    //                 priority: 10,
+    //                 enforce: true
+    //             }
+    //         }
+    //     },
+    //     runtimeChunk: true
+    // }
+};
