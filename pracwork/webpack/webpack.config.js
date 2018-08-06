@@ -229,4 +229,11 @@ module.exports = {
     //     },
     //     runtimeChunk: true
     // }
+    externals: {
+        react: 'React',
+        jquery: 'jQuery'
+    }
+    // externals: 如果我们想引用一个库，但是又不想让webpack打包，而且可以在程序中以CMD、AMD、或者Windows/global全局等方式进行引用
+    // 就可以通过配置externals
+    // 假设：我们开发了一个自己的库，里面引用了lodash这个包，经过webpack打包的时候，发现如果把这个lodash包打入进去，打包文件就会非常大。那么我们就可以externals的方式引入。也就是说，自己的库本身不打包这个lodash，需要用户环境提供
 };
