@@ -260,4 +260,54 @@ const FilterLink = connect(mapStateToLinkProps,mapDispatchToLinkProps)(Link)
 
 //不管是 stateProps 还是 dispatchProps，都需要和 ownProps merge 之后才会被赋给 MyComp。connect 的第三个参数就是用来做这件事。通常情况下，你可以不传这个参数，connect 就会使用 Object.assign 替代该方法。)
 connect(null,null,mergeProps(stateProps,dispatchProps,ownerProps)
+// connect方法归总
+connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
+    mapStateToProps(state, ownProps): stateProps  // 将store中的数据作为props绑定到组件上
+    mapDispatchToProps(dispatch, ownProps ): dispatch // 将action作为props绑定到组件上
+    mergeProps(stateProps, dispatchProps, ownProps): props// 如果指定了这个参数，mapStateToProps() 与 mapDispatchToProps() 的执行结果和组件自身的 props 将传入到这个回调函数中。该回调函数返回的对象将作为 props 传递到被包装的组件中。
+    //你也许可以用这个回调函数，根据组件的 props 来筛选部分的 state 数据，或者把 props 中的某个特定变量与 action creator 绑定在一起。
+    //如果你省略这个参数，默认情况下返回 Object.assign({}, ownProps, stateProps, dispatchProps)的结果
+    [options]: // 如果指定这个参数，可以定制connector的行为
+        [pure = true]: // 如果为 true，connector 将执行 shouldComponentUpdate,并且浅对比,mergeProps的结果，避免不必要的更新，前提是当前组件是一个“纯”组件
+        [withRef = false]: // 如果为true，connector会保存一个对被包含的组件实例的引用，改引用通过 getWrappedInstance()方法获取。默认为false
 
+// connect 源码
+export default function connect(mapStateToProps, mapDispatchToProps, mergeProps, options={}) {
+    return function wrapWithConnect(WrappedComponent) {
+        class Connect extends Component {
+            constructor(props, context) {
+                this.store = props.store || context.store
+                this.stateProps = computeStateProps(this.store, props)
+                this.dispatchProps = computeDispatchProps(this.store, props)
+                this.state = { storeState: null }
+                // 对stateProps,dispatchProps,parentProps进行合并
+                this.updateState()
+            }
+            
+            shouldComponentUpdate = (nextProps, nextState) => {
+              if (propsChanged || mapStateProducedChange || dispatchPropsChanged) {
+                  this.updateState(nextProps)
+                  return true
+              }
+            }
+            componentDidMount() {
+                // 改变Component的state
+                this.store.subscribe(() => {
+                    this.setState({
+                        storeState: this.store.getState()
+                    })
+                })
+            }
+            render() {
+                return (
+                    <WrappedComponent {...this.nextState} />
+                )
+            }
+            
+        }
+        Connect.contextTypes = {
+            store: storeShape
+        }
+        return Connect
+    }
+}

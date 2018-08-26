@@ -192,6 +192,110 @@ function mergeSort(arr){
     }
 } 
 
+// throttle 节流
+var throttle = function (func, wait, options) {
+    var timeout, context, args, result;
+    var previous = 0;
+    // options {leading: true/false 表示第一次事件马上触发回调/等待wait时间后触发
+    //          trailing: true/false } 表示最后一次回调触发/最后一次回调不触发
+    if (!options) options = {};
+    var later = function() {
+        previous = options.leading === false ? 0 : _now(); // 标记时间
+        timeout = null;
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+    }
+    var throttled = function() {
+      // 记录当前时间戳
+      var now = _.now();
+      // 如果是第一次触发且选项设置不立即执行回调
+      if (!previous && options.leading === false)
+      // 将记录的上次执行的时间戳置为当前
+      previous = now;
+      // 距离下次触发回调还需等待的时间
+      var remaining = wait - (now - previous);
+      context = this;
+      args = arguments;
+
+      // 等待时间 <= 0或者不科学地 > wait（异常情况）
+      if (remaining <= 0 || remaining > wait) {
+        if (timeout) {
+            // 清除定时器
+          clearTimeout(timeout);
+          // 解除引用
+          timeout = null;
+        }
+        // 将记录的上次执行的时间戳置为当前
+        previous = now;
+
+        // 触发回调
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      }
+      // 在定时器不存在且选项设置最后一次触发需要执行回调的情况下
+      // 设置定时器，间隔remaining时间后执行later
+      else if (!timeout && options.trailing !== false)    {
+        timeout = setTimeout(later, remaining);
+      }
+     return result;
+    };
+    throttled.cancel = function() {
+      clearTimeout(timeout);
+      previous = 0;
+      timeout = context = args = null;
+    };
+
+    return throttled;
+}
+
+// debounced 去抖
+_.debounce = function(func, wait, immediate) {
+    var timeout, result;
+
+     // 定时器设置的回调，清除定时器，执行回调函数func
+    var later = function(context, args) {
+      timeout = null;
+      if (args) result = func.apply(context, args);
+    };
+
+     // restArgs函数将传入的func的参数改造成Rest Parameters —— 一个参数数组
+    var debounced = restArgs(function(args) {
+      if (timeout) clearTimeout(timeout);
+      if (immediate) {
+        // 立即触发的条件：immediate为true且timeout为空
+        var callNow = !timeout;
+        timeout = setTimeout(later, wait);
+        if (callNow) result = func.apply(this, args);
+      } else {
+        // _.delay方法实际上是setTimeout()包裹了一层参数处理的逻辑
+        timeout = _.delay(later, wait, this, args);
+      }
+
+      return result;
+    });
+
+    debounced.cancel = function() {
+      clearTimeout(timeout);
+      timeout = null;
+    };
+
+    return debounced;
+  };
+
+
+// 节流应用
+var outerPane = $details.find(".details-pane-outer"),
+    didScroll = false;
+$(window).scroll(function() {
+    didScroll = true;
+});
+setInterval(function() {
+    if ( didScroll ) {
+        didScroll = false;
+        // Check your page position and then
+        // Load in more results
+    }
+}, 250);
 
 </script>
 

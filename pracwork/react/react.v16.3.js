@@ -135,7 +135,7 @@ class Parent extends React.Component {
   render(){
     return (
       <CustomTextInput
-        inputRef={ref => this.inputElement = ref}/>     //inputRef 哪来的？？
+        inputRef={ref => this.inputElement = ref}/>
     )
   }
 }
@@ -599,4 +599,15 @@ componentDidUpdate(prevProps, prevState, snapshot) {
     const list = this.listRef.current;
     list.scrollTop = list.scrollHeight - snapshot;
   }
+}
+
+// isMounted() 判断异步函数已在willUnmonut的时停止setState，已被废弃，更改如下(官网推荐如下)
+componentDidMount(){
+  this.serverRequest = $.get(URL,function(res) {
+    this.setState({})
+  }).bind(this)
+}
+
+componentWillUnmount(){
+  this.serverRequest.abort()
 }
