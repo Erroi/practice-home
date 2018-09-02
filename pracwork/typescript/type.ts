@@ -131,3 +131,11 @@ class Image implements SelectableControl { // 类“Image”错误实现接口�
 }
                 // SelectableControl包含了Control的所有成员，包括私有成员state，因为state是私有成员，所以只能是Control的子类才能实现SelectableControl接口。
                 // 因为只有Control的子类才能够拥有一个声明于Control的四哟成员state
+
+
+// 如果 SquareConfig带有上面定义的类型的color和width属性，并且还会带有任意数量的其它属性，那么我们可以这样定义它
+interface SquareConfig {
+    color?: string;
+    width?: number;
+    [propName: string]: any;
+}
