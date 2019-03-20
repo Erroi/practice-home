@@ -150,7 +150,7 @@ C、Array.of(2,3,4)  将一组值转化为数组  //[2,3,4]
     return value >3;
 })
 
-new Array(3).full(7) //[7,7,7]
+new Array(3).fill(7) //[7,7,7]
 arr1.keys()
 arr.values()
 arr.entries()
@@ -169,6 +169,9 @@ call,applay 都属于 Function.prototype 的一个方法， 所以每个function
  obj.call(thisObj,arg1,arg2,arg3);
  obj.applay(thisObj,[arg1,arg2,arg3]);
 将obj的属性和方法绑定到thisObj上，运行上下文this指向thisObj，或者说 thisObj继承了obj的方法和属性；
+
+Array.apply(null, {length: 4}) 相当于 Array.apply(null, [undefined, undefined, undefined,undefined])
+Array(4) 只是4个占位符，不能map出实际值 new Array(4).fill(8)
 
 使用场景：
     将类数组可以使用数组的增删改查

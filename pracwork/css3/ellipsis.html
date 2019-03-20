@@ -6,11 +6,18 @@
 	<style type="text/css">
 		#div2{
 			width:100px;
-			word-wrap:nowrap;
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			overflow: hidden;
 			border:10x solid #ccc;
+		}
+		#div1{
+			width: 100px;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			text-overflow: ellipsis;
+			overflow: hidden;
 		}
 	</style>
 </head>

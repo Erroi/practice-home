@@ -107,6 +107,6 @@ console.log(x) // 1
 // console.log(x);        //3
 // }
 //
-// foo() // 3
+// foo()
 // console.log(x) // 1
 

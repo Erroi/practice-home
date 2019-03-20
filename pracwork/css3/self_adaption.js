@@ -20,7 +20,7 @@
             var clientWidth = docEl.clientWidth;                                  //主要解决rem 问题
             if (!clientWidth) return;
             docEl.style.fontSize = (clientWidth / 18.75) + 'px';    //  375 / 18.75 = 20px
-        };                                                          // 写代码时是按照 设计稿 750 / 2 / 20 来计算rem的
+        };                                                          // 写代码时是按照 设计稿 750 / 2 / 20 来计算多少rem的
 
     if (!doc.addEventListener) return;
     win.addEventListener(resizeEvt, recalc, false);
@@ -96,3 +96,9 @@
         return new Alert(param);
     }
 })(window);
+
+// 备注：
+// window.devicePixelRatio = 设备的物理像素 / 设备独立像素dips
+// dip 可以区分视网膜设备还是非视网膜设备：非视网膜屏幕的iphone上，屏幕物理像素320像素，独立像素也是320像素，因此，window.devicePixelRatio等于1
+// 在设置<meta name='viewport' content='width=device-width'>，会设置视窗布局宽度320px，页面很自然的覆盖在屏幕上。
+// document.documentElement.clientWidth在大部分浏览器下，得到的是布局视区的宽度，等同于dips。
