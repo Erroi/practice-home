@@ -69,9 +69,9 @@ app.use(route.get('/about',about));
 
 //静态资源 koa-static
 const path = require('path');
-const serve = require('koa-static');
+const server = require('koa-static');
 
-const main = serve(path.join(__dirname));
+const main = server(path.join(__dirname));
 app.use(main);
 
 //重定向  如 用户登录后将其重定向到登录前的页面

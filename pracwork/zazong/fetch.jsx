@@ -33,12 +33,15 @@ fetch(url,{
     alert('Error submitting form!');
 });
 
+// XHR2是支持跨域请求的，只不过要满足浏览器端支持CORS，服务器通过Access-Control-Allow-Origin来允许指定的源进行跨域
 //请求需要跨域的资源  mode:'same-origin、no-cors、cors'
 
 fetch(url,{
+    // 设置可跨域
     mode:'same-origin',       //same-origin 同源，不允许跨域
     mode:'no-cors',          //该模式允许来自cdn的脚本，其他域的图片和其他一些跨域资源。  from资源
     mode:'cors',            //跨域请求，从第三方提供的api获取数据                     请求
+    // fetch 默认不携带cookie，需要设置credentials，与XHR2的withCredentials类似；omit忽略cookie的发送；same-origin只有同域发送，跨域不携带；include同域跨域都可发送cookie
     credentials:'omit(默认)、same-origin、include',  //credentials属性决定是否可以跨域访问cookie。
 }).then();
 
