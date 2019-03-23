@@ -31,7 +31,7 @@ Promise
 function Promise(fn){
     var value = null;
     var callbacks = [];
-    var state = 'pending';                  //5 加入状态
+    let state = 'pending';                  //5 加入状态
 
     this.then = function(onFulfilled){     //1 注册回调函数
         if(state = 'pending'){
