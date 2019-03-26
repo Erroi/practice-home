@@ -30,5 +30,17 @@
 </head>
 <body>
     <p>html模板</p>
+    <p>
+        第一步：设置网页在可视窗口的布局方式
+        新增 viweport-fit 属性，使得页面内容完全覆盖整个窗口
+        <meta name="viewport" content="width=device-width, viewport-fit=cover">
+        第二步：如果想对某个元素进行底部上移或者顶部下移可以做以下适配。
+        注：如果想下面constant env 属性有效果，请务必添加上面meta 标签才能实现
+        body{
+            padding-bottom: constant(safe-area-inset-bottom);
+            padding-bottom: env(safe-area-inset-bottom);
+         }
+         js方法：$(".phonex-pb").css("padding-bottom","34px");
+    </p>
 </body>
 </html>

@@ -1,4 +1,3 @@
-//奇葩  看他们的解释
 //两个对象的值是否相同，取决于它们是否指向相同的底层
 var a = {name: "andrew"},
 b = {name: "andrew"};
@@ -32,7 +31,7 @@ typeof null; //object;
 typeof undefined;  //'undefined'
 typeof new String(s);  //'object'
 
-//js值分为两种类型：基本类型和对象类型
+//js值分为两种类型：基本类型和引用类型
 //基本类型：String Number Boolen,Symbol,undefined,null
 //对象类型：Function Object Array
 
@@ -184,12 +183,14 @@ Array(4) 只是4个占位符，不能map出实际值 new Array(4).fill(8)
     var arr2 = ['Hoe',44];
     Array.prototype.push.apply(arr1,arr2);     //立即执行
 
-    找出数组中的最小值
+    找出数组中的最大值
     var nums = [2,4,5,1,34,62,4];
     Math.max.apply(Math,nums)
 
     验证是否是数组
+    arr.constructor === Array
     Object.prototype.toString.call(obj) == '[object Array]'
+    Object.prototype.toString.call(obj) === '[object Object]'  // '[object Date]' '[object RegExp]'
 
     唯一区别是apply接受的是数组参数，call接受的是连续参数。
 

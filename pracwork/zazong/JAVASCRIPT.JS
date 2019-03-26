@@ -192,7 +192,7 @@ K. OOP 面向对象编程：对象指类的实例，它将对象作为程序的�
 	2 基于原型的继承
 			function Foo(){              //Foo.prototype = {
 				this.y = 2;					//constructor:Foo,
-											//_proto_:Object.prototype,  所有的函数的原型最终都指向Object的prototype，Object自身拥有toString()...方法，而oject的原型指向null(Object.prototype._proto_ = null)
+											//_proto_:Object.prototype,  所有的函数的原型最终都指向Object的prototype，Object自身拥有toString()...方法，而oject的原型指向null(Object.prototype.__proto__ = null)
 			};								//x:1}
 			typeof Foo.prototype //Object {}
 			Foo.prototype.x = 1;                    
@@ -215,7 +215,7 @@ K. OOP 面向对象编程：对象指类的实例，它将对象作为程序的�
 				this.className = className;
 			};																	
 			Students.prototype = Object.create(Person.prototype);   //继承原型属性和方法，同时 用Object.create创建一个新的对象，防止Students和Person指向同一个，以便Students可以设定自己私有的原型方法
-			Students.prototype.constructor = Students;				//Students.prototpe={constructor:  ,_proto_:Person.prototype,...}
+			Students.prototype.constructor = Students;				//Students.prototype={constructor:  ,_proto_:Person.prototype,...}
 			Students.prototype.walk = function(){					//这里会覆盖Person上的walk方法。
 				console.log(this.name + 'is walk' + this.className)
 			}

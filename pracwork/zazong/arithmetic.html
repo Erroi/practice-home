@@ -107,7 +107,7 @@ function zeroDeline(){
 
 
 //4.创建数组方法
-var num = [];  num = [1,2,3];   num = new Array();  num = new Array(1,2,3);/**[1,2,3]**/  num = new Array(10);/**[10empty] **/ num = Array.of(3) //[3]  
+var num = [];  num = [1,2,3];   num = new Array();  num = new Array(1,2,3);/**[1,2,3]**/  num = new Array(10);/**[10empty] **/ num = Array.of(3); num = Array.of(3,4,5) //[3] [3,4,5]   
 Array.isArray(num) //true
 arr.indexof('3');
 arr.reverse();  //数组倒叙
@@ -188,10 +188,49 @@ function mergeSort(arr){
         return arr;
     }
     var fenArr = function(arr){
-        while(i)
+        // while(i)
     }
 } 
 
+
+// 函数防抖debounce 函数防抖可以把多个顺序的调用合并成一次。 手机号输入后检测、窗口大小resize
+// 函数节流throttle 保证一个事件一定时间内只执行一次。   DOM元素的拖拽实现mousemove
+function debounce(fn, delay, scope) {
+    // 定时器
+    let timer;
+    return function() {
+        let context = scope || this, args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+            fn.apply(context, args);
+        }, delay)
+    }
+}
+
+function throttle(fn, threshold, scope) {
+    // 时间戳
+    let pre = new Date().getTime()
+    return function() {
+        let context = scope || this, args = arguments;
+        let now = Date.now();
+        if (now - pre > threshold, scope) {
+            pre = now;
+            fn.apply(context, args)
+        }
+    }
+}
+
+els[1].addEventListener('scroll', debounce(function handle() {
+    console.log('执行滚动事件!（函数防抖） count2=', ++count2);
+}, THRESHOLD));
+els[2].addEventListener('scroll', throttle(function handle() {
+    console.log(Date.now(),', 执行滚动事件!（函数节流） count3=', ++count3);
+}, THRESHOLD));
+
+</script>
+
+<script>
+// 可忽略
 // throttle 节流
 var throttle = function (func, wait, options) {
     var timeout, context, args, result;
@@ -296,7 +335,6 @@ setInterval(function() {
         // Load in more results
     }
 }, 250);
-
 </script>
 
 </html>

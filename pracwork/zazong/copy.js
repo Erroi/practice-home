@@ -22,10 +22,12 @@ function deepCopy(origin) {
             tmpArr.push(deepCopy(item));
         }
         return tmpArr;
-    } else if (typeof origin == 'object') {
+    } else if (Object.prototype.toString.call(origin) === '[object Object]') {
         let tmpObj = {};
         for (let key in origin) {
-            tmpObj[key] = deepCopy(origin[key]);
+            if (origin.hasOwnProperty(key)) {
+                tmpObj[key] = deepCopy(origin[key]);
+            }
         }
         return tmpObj;
     }

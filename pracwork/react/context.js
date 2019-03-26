@@ -36,7 +36,6 @@ class D extends Component{
 
 //stateless 中使用  context通过第二个参数传入
 function D(props,context){
-
     return (
         <div>
             {this.context.user.name}

@@ -48,3 +48,31 @@ fetch(url,{
 //!特记
 //1 当fetch()返回的promise，当status为400，500时不会标记为reject，而仍然标为resolve，但resolve的OK属性标为false、200是true；只有当网络请求阻止或故障才被标为reject
 //2 fetch()默认不会从服务器接受和发送cookie，否则必须设置credentials
+
+
+// 原理
+// Fetch 是基于 XMLHTTPRequest对象实现数据请求的，同时也是基于Promise链式调用的。
+function ajax(url, suc, fail) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 ) {
+            if(xhr.status === 200) {
+                suc(xhr.response)
+            }else{
+                fail(xhr.response)
+            }
+        }
+    }
+    xhr.send(null)
+}
+
+function fetch(url){
+    return new Promise(function(resolve,reject){
+        ajax(url, function(res){
+            resolve(res)
+        },function(res){
+            reject(res)
+        })
+    })
+}
