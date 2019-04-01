@@ -1,9 +1,8 @@
-1 类型注解：为函数或变量添加约束
+1 类型注解：为函数或变量// 1 类型注解：为函数或变量添加约束
+function greeter(person: string) {
     return "Hello, " + person;
 }
-
 let user = [0, 1, 2];
-
 document.body.innerHTML = greeter(user);
 
 2 接口：描述一个拥有firstName和lastName字段的对象
@@ -139,3 +138,5 @@ interface SquareConfig {
     width?: number;
     [propName: string]: any;
 }
+
+

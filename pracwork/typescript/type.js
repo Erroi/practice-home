@@ -1,3 +1,5 @@
+// 参考 https://jkchao.github.io/typescript-book-chinese/typings/interfaces.html
+
 // 1 类型注解：为函数或变量添加约束
 function greeter(person: string) {
     return "Hello, " + person;
@@ -51,4 +53,18 @@ class声明
 function声明
 
 
+
+/**
+ * namespace 命名空间
+ */
+(function(Utility) {
+    Utility.foo = 123;
+})(Utility || (Utility = {}));
+// ts 提供 namespace 关键字来描述这种分组
+namespace Utility {
+    export function log(msg){
+        console.log(msg)
+    }
+    export const foo = 123
+}
 

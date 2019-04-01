@@ -1,3 +1,19 @@
+/**
+ * styled-components 的原理
+ */
+
+// styled-components 是生成实际的带class的css，然后把class通过className绑定到具体的DOM节点上，
+// 然后在运行的时候，动态的将css添加到html文档的head节点上，因为其是动态添加到head的，所以他在一般静态css文件的后面，权重要略高
+
+// 其写法的原理就是利用了es6的模板字符串
+f`test ${() => console.log('test function')}` // ["test", ""] () => console.log('test function')
+styled.h1`
+font-size: 1.5em;
+`
+// 其实就是
+styled.h1('font-size: 1.5em;')
+
+
 // h1 p div button input
 const Title = styled.h1`
 font-size: 1.5em;

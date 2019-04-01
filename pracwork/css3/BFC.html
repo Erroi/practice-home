@@ -35,7 +35,7 @@
             <div class="right">我触发了bfc，可以自适应且不占用left</div>
         </div>
     </div>
-    <p>BFC:块级各式换化上下文，表示元素自身对自己内容进行组织运算，相当于一个独立的渲染但愿；display:inline-block;触发BFC特性，不会与浮动盒子重叠</p>
+    <p>BFC:块级格式化上下文，表示元素自身对自己内容进行组织运算，相当于一个独立的渲染单元；display:inline-block;触发BFC特性，不会与浮动盒子重叠</p>
     <p>BFC有一下特性： 内部的Box会在垂直方向，从顶部开始一个接一个地放置。 Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。 BFC的区域不会与float box叠加。 BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。 计算BFC的高度时，浮动元素也参与计算。
     </p>
     <p>那么我们该怎么使用BFC呢，如何触发BFC呢？： float 除了none以外的值 overflow 除了visible 以外的值（hidden，auto，scroll ） display (table-cell，table-caption，inline-block, flex, inline-flex) position值为（absolute，fixed） fieldset元素 在以上的情况里可以创建BFC。

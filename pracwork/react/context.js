@@ -49,7 +49,7 @@ D.contextTypes = {
 
 
 //性能优化  浅比较
-shouldComponentUpdate(nextProps,nextState){
+shouldComponentUpdate (nextProps,nextState) {
     let isChanged = false;
     for (let key in nextState) {
         if (this.state[key] !== nextState[key]) {
@@ -59,4 +59,4 @@ shouldComponentUpdate(nextProps,nextState){
         }
     }
     return isChanged;
-}
+};

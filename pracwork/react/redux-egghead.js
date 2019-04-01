@@ -311,3 +311,85 @@ export default function connect(mapStateToProps, mapDispatchToProps, mergeProps,
         return Connect
     }
 }
+
+
+// 简洁易懂的connect原理，参见 https://blog.csdn.net/c_kite/article/details/79018469
+const connect = (mapStateToProps) => (People) => {
+    class Connect extends Component {
+      static contextTypes = {
+        store: PropTypes.object
+      }
+  
+      constructor () {
+        super()
+        this.state = { allProps: {} }
+      }
+  
+      componentWillMount () {
+        const { store } = this.context
+        this.setProps()
+      }
+  
+      setProps () {
+        const { store } = this.context
+        let stateProps = mapStateToProps(store.getState(), this.props) // 额外传入 props
+        this.setState({
+          allProps: { // 整合普通的 props 和从 state 生成的 props
+            ...stateProps,
+            ...this.props
+          }
+        })
+      }
+  
+      render () {
+        return <People {...this.state.allProps} />
+      }
+    }
+    return Connect
+  }
+
+  const connect = (mapStateToProps, mapDispatchToProps) => (People) => {
+    class Connect extends Component {
+      static contextTypes = {
+        store: PropTypes.object
+      }
+  
+      constructor () {
+        super()
+        this.state = {
+          allProps: {}
+        }
+      }
+  
+      componentWillMount () {
+          // 此处store 是从provider的context取得
+        const { store } = this.context
+        this.setProps()
+        store.subscribe(() => this.setProps())
+      }
+  
+      setProps () { // 做了一下完整性的判断
+        const { store } = this.context
+        let stateProps = mapStateToProps
+          ? mapStateToProps(store.getState(), this.props)
+          : {} // 防止 mapStateToProps 没有传入
+        let dispatchProps = mapDispatchToProps
+          ? mapDispatchToProps(store.dispatch, this.props)
+          : {} // 防止 mapDispatchToProps 没有传入
+        this.setState({
+          allProps: {
+            ...stateProps,
+            ...dispatchProps,
+            ...this.props
+          }
+        })
+      }
+  
+      render () {
+        return <People {...this.state.allProps} />
+      }
+    }
+    return Connect
+  }
+
+// 中间件 https://blog.csdn.net/qq_42606051/article/details/81907165
