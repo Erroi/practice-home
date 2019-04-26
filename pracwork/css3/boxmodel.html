@@ -16,6 +16,23 @@
 		td{
 			border:1px solid #ccc;
 		}
+		.box{
+			display: flex;
+			flex-flow: row nowrap;
+			margin:  0 30px;
+			width: 600px;
+			border: 1px solid red;
+		}
+		.left,.right{
+			width: 100px;
+			background-color: #ccc;
+		}
+		.main{
+			flex: 1;
+			height: 500px;
+			background-color: red;
+		}
+
 	</style>
 </head>
 <body>
@@ -30,5 +47,10 @@
 		</tr>
 
 	</table>
+	<div class="box">
+		<div class="left"></div>
+		<div class="main"></div>
+		<div class="right"></div>
+	</div>
 </body>
 </html>

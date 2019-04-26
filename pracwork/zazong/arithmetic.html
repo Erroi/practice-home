@@ -193,6 +193,38 @@ function mergeSort(arr){
 } 
 
 
+// 二分查找法
+function binarySearch(target,arr,start,end){
+    let start = start || 0;
+    let end = end || arr.length - 1;
+    let middle = parseInt(start + (end - start) / 2)
+    if(target == arr[middle]){
+        return middle;
+    } else if (target > arr[middle]){
+        return binarySearch(target, arr, middle + 1, end)
+    } else {
+        return binarySearch(target, arr, start, middle - 1)
+    }
+    return -1
+}
+
+function binarySearch(target, arr) {
+    let start = 0;
+    let end = arr.length - 1;
+    let middle = parseInt(start + (end - start)/2)
+    while(start < end){
+        if (target == arr[middle]){
+            return middle
+        }else if(target > arr[middle]){
+            start = middle +1
+        }else{
+            end = middle -1
+        }
+    }
+    return -1
+}
+
+
 // 函数防抖debounce 函数防抖可以把多个顺序的调用合并成一次。 手机号输入后检测、窗口大小resize
 // 函数节流throttle 保证一个事件一定时间内只执行一次。   DOM元素的拖拽实现mousemove
 function debounce(fn, delay, scope) {

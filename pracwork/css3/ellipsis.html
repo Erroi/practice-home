@@ -22,10 +22,10 @@
 	</style>
 </head>
 <body>
-	<p>The following two divs contains a long text that will not fit in the box. As you can see, the text is clipped.</p>
-
+	<p>The following &amp; two divs contains&gt; a long &lt; &gt;&amp; &quot; &apos;&nbsp; &emsp; text that will not fit in the box. As you can see, the text is clipped.</p>
+	<div style="height:1px;overflow:hidden;background:red"></div>
 <p>This div uses "text-overflow:clip":</p>
-<div id="div1">This is some long text that will not fit in the box</div>
+<div id="div1">This is some long text thatwill not fit in the box</div>
 
 <p>This div uses "text-overflow:ellipsis":</p>
 <div id="div2">This is some long text that will not fit in the box</div>

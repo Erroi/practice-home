@@ -68,4 +68,32 @@ function MyFunctionalComponent() {
       );
     }
   }
+
+
+/**
+ * Vitual Dom diff
+ *  */ 
+// 1. tree diff
+// 树的分层比较，只会同层级比较，
+// 2. component diff
+//  可以用 shouldComponentUpdate 判断来节约算法时间
+// 3. element diff
+// 通过设置唯一key，对element进行优化
+
+
+
+// 重排reflow：布局、结构、尺寸发生变化；重绘repaint：颜色等发生变化； 重排一定重绘，反之不然。
+// 任何改变用来构建渲染树的信息都会导致一次重排或重绘。
+
+// 添加、删除、更新DOM节点
+
+// 通过display: none隐藏一个DOM节点-触发重排和重绘
+
+// 通过visibility: hidden隐藏一个DOM节点-只触发重绘，因为没有几何变化
+
+// 移动或者给页面中的DOM节点添加动画
+
+// 添加一个样式表，调整样式属性
+
+// 用户行为，例如调整窗口大小，改变字号，或者滚动
   

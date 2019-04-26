@@ -76,3 +76,42 @@ function fetch(url){
         })
     })
 }
+
+
+
+function Promise(fn){
+    var value = null;
+    var callbacks = [];
+
+    var state = 'pending';      // 4.加入状态是解决：如果promise异步操作已经成功，那在之前注册的回调会执行，但之后调用then注册的回调再不会执行。
+
+    this.then = function(onFulfilled){
+        if (state == 'pending'){    //4.
+
+            callbacks.push(onFulfilled)  // 1. 将异步操作成功时执行的回调放入callbacks队列里，注册函数；
+            return this;
+        }
+        onFulfilled(value)      // 4.resolve执行时，会将状态设为fulfilled，在此之后调用then添加的新回调，都会立即执行。
+        return this;    // 3.想让then能够链式调用，then().then()
+    }
+
+    function resolve(newValue){        // 2. resolve是将 callbacks队列中的回调一一执行；
+        value = newValue;
+        state = 'fulfilled';        // 4.   
+
+        setTimeout(function(){     // 3.setTimeout 将resolve中执行回调的逻辑放到js队列末尾，以保证在执行resolve时，then()内的回调注册完。
+            callbacks.forEach(function(callback){
+                callback(value);
+            })
+        },0)
+    }
+
+    fn(resolve);
+}
+/**
+ * promise里面的then函数仅仅是注册了后续需要执行的代码，真正执行的是在resolve里面，
+ * promise的整个实现过程使用了设计模式中的观察者模式：
+ * 1、通过Promise.prototype.then和Promise.prototype.catch方法将观察者方法注册到被观察者Promise对象中，
+ * 同时返回新的promise，以便链式调用。
+ * 2、被观察者通过管理内部pending、fulfilld和reject的状态改变，同时通过构造函数中传递的resolve和reject方法以主动触发状态转变通知观察者。
+ */

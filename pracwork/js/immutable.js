@@ -1,3 +1,22 @@
+/**
+ * immutable的作用
+*/
+// 很好的规避了js中对象是可变的，而使用引用赋值，新的对象简单的引用了原始对象，改变新的对象的时候将影响到原始对象。
+// 另一种方法是使用浅拷贝深拷贝，来避免修改，但这样造成了内存和CPU的浪费。
+
+/**
+ * immutable 原理
+ */
+// immutable date 一旦创建就不能被更改，增删改都会返回一个新的immutable对象；其原理是持久化数据结构（旧数据创建新数据的时候，要保证旧数据同时可用）
+// 在deepcopy的时候，采用结构共享（如果对象树的某个节点改变，只修改节点和其父节点，其他节点共享）
+
+
+/**
+ * immutable 优点及使用
+ */
+// 当然我们也可以在 shouldComponentUpdate() 中使用使用 deepCopy 和 deepCopy 来避免无必要的 render()，但 deepCopy 和 deepCompare 一般都是非常耗性能的。
+// Immutable 则提供了简洁高效的判断数据是否变化的方法，只需 === 和 is 比较就能知道是否需要执行 render()，而这个操作几乎 0 成本，所以可以极大提高性能。修改后的 shouldComponentUpdate 是这样的
+
 const im = require('immutable')
 
 // Record

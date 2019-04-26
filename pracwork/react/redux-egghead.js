@@ -392,4 +392,3 @@ const connect = (mapStateToProps) => (People) => {
     return Connect
   }
 
-// 中间件 https://blog.csdn.net/qq_42606051/article/details/81907165
