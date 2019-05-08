@@ -291,7 +291,7 @@ export default function connect(mapStateToProps, mapDispatchToProps, mergeProps,
               }
             }
             componentDidMount() {
-                // 改变Component的state
+                // 改变Component的state  监听数据改变，有改变则setState，使storeState始终为最新新的
                 this.store.subscribe(() => {
                     this.setState({
                         storeState: this.store.getState()
@@ -328,6 +328,14 @@ const connect = (mapStateToProps) => (People) => {
       componentWillMount () {
         const { store } = this.context
         this.setProps()
+      }
+
+      componentDidMount(){
+          store.subscribe(() => {
+              this.setState({
+                  
+              })
+          })
       }
   
       setProps () {

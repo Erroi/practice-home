@@ -138,11 +138,21 @@ Set()
 //冒泡排序:从最开始的位置或结尾的位置反方向对比，如果比它大/小,就交换然后继续走，第一遍走完,最后一个位置是最大值或者最小值
 //时间复杂度是O(n^2),是双重循环
 function bubbleSort(numArr){
-    for(let i=0;i<numArr.length - 1;i++){
-        if(numArr[i] > numArr[i + 1]){
-            let n1 = numArr[i + 1];
-            numArr[i] = numArr[i + 1];
-            numArr[i + 1] = n1;
+    // 错❌
+    // for(let i=0;i<numArr.length - 1;i++){
+    //     if(numArr[i] > numArr[i + 1]){
+    //         let n1 = numArr[i + 1];
+    //         numArr[i] = numArr[i + 1];
+    //         numArr[i + 1] = n1;
+    //     }
+    // }
+    for(let i = 0; i < arr.length - 1; i++){
+        for(let j = i + 1; j < arr.length; j++){
+            if(arr[i] > arr[j]){
+                let num = arr[i];
+                arr[i] = arr[j];
+                arr[j] = num;
+            }
         }
     }
 }

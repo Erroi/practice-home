@@ -34,7 +34,7 @@ history.replace()    <Redirect/>
         <Prompt
         when={true}
         message={'are you sure to leave'}
-        message={(location) => location.pathname.startWidth('app') ? true : 'are you sure you want to go to ${lacation.pathname}'}>
+        message={(location) => location.pathname.startWith('app') ? true : 'are you sure you want to go to ${lacation.pathname}'}>
 
 
 #### <Route>
@@ -57,7 +57,7 @@ history.replace()    <Redirect/>
 
 > 为什么withRouter要包在connect外面： 
     
-* 避免更新受阻: 因为react-router的connect高阶组件会为传入的参数组件进行shouldComponentUpdate()钩子函数比较。未防止location被浅比较拦截出去(即使url变化，也无法重新渲染)
+* 避免更新受阻: 因为react-redux的connect高阶组件会为传入的参数组件进行shouldComponentUpdate()钩子函数比较。未防止location被浅比较拦截出去(即使url变化，也无法重新渲染)
 
 > 组件如何拿到location对象
 

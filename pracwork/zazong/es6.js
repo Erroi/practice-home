@@ -327,3 +327,124 @@ let fooPromise = getFoo();
 let barPromise = getBar();
 let foo = await fooPromise;
 let bar = await barPromise;
+
+
+/**
+ *  iterator  for...of
+ */
+// 字符串是一个类数组的对象，也原生具有iterator接口。
+var someString = "hi";
+typeof someString[Symbol.iterator]
+// "function"
+
+var iterator = someString[Symbol.iterator]();
+
+iterator.next()  // { value: "h", done: false }
+iterator.next()  // { value: "i", done: false }
+iterator.next()  // { value: undefined, done: true }
+// 一个数据结构只要部署了Symbol.iterator属性，就被视为具有 iterator 接口，就可以用for...of循环遍历它的成员。
+// 也就是说，for...of循环内部调用的是数据结构的Symbol.iterator方法
+// 对于普通的对象，for...of结构不能直接使用，会报错，必须部署了 Iterator 接口后才能使用。但是，这样情况下，for...in循环依然可以用来遍历键名
+let es6 = {
+	edition: 6,
+	committee: "TC39",
+	standard: "ECMA-262"
+  };
+  
+  for (let e in es6) {
+	console.log(e);
+  }
+  // edition
+  // committee
+  // standard
+  
+  for (let e of es6) {
+	console.log(e);
+  }
+  // TypeError: es6[Symbol.iterator] is not a function
+//  for...in循环的缺点：1.数组的键名是数字；2.会遍历原型链上的属性；3.默认情况下，会以任意顺序遍历键名。（适合遍历数组）
+// for...of 没有以上缺点，1.不同于forEach，可以与break、continue、return配合使用。（数组内置的forEach不能使用return、break等跳出循环）
+// 只能遍历具有iterator接口的类数组和数组
+for(var i of es6){
+	if(i > 3){
+		break;
+		console.log(i)
+	}
+}
+
+
+/**
+ * proxy 在目标对象之前架一层‘拦截’，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。
+ */
+let proto = new Proxy({}, {
+	get(target, propertyKey, receiver) {
+		console.log('GET' + propertyKey);
+		return target[propertyKey]
+	}
+});
+let obj = Object.create(proto);
+obj.foo // 'GET foo'
+
+// 另一种
+Object.defineProperties(target,{
+	name: {
+		get(){
+			return name;
+		},
+		set(){
+			console.log('warning')
+		}
+	}
+})
+
+
+/**
+ * 扩展运算符
+ * 由apply实现
+ */
+// ES5 的写法
+function f(x, y, z) {
+	// ...
+  }
+  var args = [0, 1, 2];
+  f.apply(null, args);
+  
+  // ES6的写法
+  function f(x, y, z) {
+	// ...
+  }
+  let args = [0, 1, 2];
+  f(...args);
+
+
+  /**
+   * Array.from(类数组对象) 转化为真正的数组
+   * 由[].slice.call(obj)实现
+   */
+  Array.from({ length: 3 });
+// [ undefined, undefined, undefined ]
+Array.from([1, 2, 3], (x) => x * x)
+// [1, 4, 9]
+
+/**
+ * Array.of() 将一组值转化为数组
+ */
+Array.of() // []
+Array.of(undefined) // [undefined]
+Array.of(1) // [1]
+Array.of(1, 2) // [1, 2]
+
+
+/**
+ * 解构赋值
+ * foo是匹配的模式，baz才是变量。真正被赋值的是变量baz，而不是模式foo。
+ */
+
+let { foo: baz } = { foo: 'aaa', bar: 'bbb' };
+baz // "aaa"
+foo // error: foo is not defined
+
+let obj = { first: 'hello', last: 'world' };
+let { first: f, last: l } = obj;
+f // 'hello'
+l // 'world'

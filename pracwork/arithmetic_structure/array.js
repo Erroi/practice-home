@@ -64,16 +64,36 @@ console.log(this.addnum);  //undefined
 // console.warn(getSet(arr, 3, 0));
 //
 //
-// //实现bind的功能
-// Function.prototype.bind = function() {
-//     var self = this,
-//         context = [].shift.call(arguments),
-//         args = [].slice.call(arguments);     //转为数组    // rest参数的写法，numbers就是数组  const sortNumbers = (...numbers) => numbers.sort();
-//     return function() {
-//         return self.apply(context, [].concat.call(args, [].slice.call(arguments)));
-//     };
-// };
-//
+//实现bind的功能
+Function.prototype.bind = function() {
+    var self = this,
+        context = [].shift.call(arguments),
+        args = [].slice.call(arguments);     //转为数组    // rest参数的写法，numbers就是数组  const sortNumbers = (...numbers) => numbers.sort();
+    return function() {
+        return self.apply(context, [].concat.call(args, [].slice.call(arguments)));
+    };
+};
+
+
+/**
+ * call 的生js实现：改变this，并执行
+ */
+Function.prototype.callImitator = function(context = window){  //context = window 如果.call(null) this指向window
+    context.fn = this;  // 获取调用call的函数，就是this
+    context.fn();
+    delete context.fn;
+}
+
+let foo = {
+    value: 1,
+}
+
+let bar = function(){
+    console.log(this.value)
+}
+
+bar.callImitator(foo)   // 1
+
 // // 测试
 // var obj = {
 //     name: "ligang"
@@ -86,17 +106,17 @@ console.log(this.addnum);  //undefined
 // func(3);   //ligang   [1,2,3]
 
 //
-var x = 1;
-function foo(x, y = function() { x = 2; }) {
-    console.log(x)  //undefined
-x = 3;
-console.log(x)   //3
-y();
-console.log(x);     //2
-}
+// var x = 1;
+// function foo(x, y = function() { x = 2; }) {
+//     console.log(x)  //undefined
+// x = 3;
+// console.log(x)   //3
+// y();
+// console.log(x);     //2
+// }
 
-foo() // 2
-console.log(x) // 1
+// foo() // 2
+// console.log(x) // 1
 //
 // var x = 1;
 // function foo(x, y = function() { x = 2; }) {
@@ -109,4 +129,37 @@ console.log(x) // 1
 //
 // foo()
 // console.log(x) // 1
+
+
+
+/**
+ * new 的实现机制
+ */
+
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+}
+Person.prototype.toPrint = function(){
+    return this.name + '-' + this.age;
+}
+
+let student = new Person('小名', 28);
+
+student.toPrint() // 小名-28
+student.name    // 小名
+student.age     // 28
+
+// new，使student继承了Person的属性和方法，并且返回一个新对象。
+function newImitator(){
+    let obj = Object.create();
+    let Person = Array.prototype.shift.call(arguments);
+    obj.__proto__ = Person.prototype;   // 让obj的原型指向构造函数，这样obj就可以访问到Person的属性
+    Person.apply(obj, arguments)        // 让this指向指给obj
+    return obj;
+}
+
+let teacher = newImitator(Person, 'Ms.z', 30)
+teacher.toPrint() // Ms.z-30
+teacher.name    // Ms.z
 

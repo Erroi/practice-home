@@ -114,4 +114,37 @@ function Promise(fn){
  * 1、通过Promise.prototype.then和Promise.prototype.catch方法将观察者方法注册到被观察者Promise对象中，
  * 同时返回新的promise，以便链式调用。
  * 2、被观察者通过管理内部pending、fulfilld和reject的状态改变，同时通过构造函数中传递的resolve和reject方法以主动触发状态转变通知观察者。
+ * 
+Promise的构造函数是同步执行的。then 是异步执行的。
  */
+
+//  .all() 返回的是一个promise，且resolve的参数是一个数组
+Promise.all = function(promises){
+    return new Promise((resolve, reject) => {
+        let index = 0;
+        let result = [];
+        if (promises.length == 0){
+            resolve(result);
+        }else {
+            setTimeout(function(){
+                for(let i = 0; i < promises.length; i++){
+                    Promise.resolve(promises[i]).then((data) => {
+                        result[i] == data;
+                        if(++index === promises.length) {
+                            resolve(result)
+                        }
+                    }, (err) => {
+                        reject(err);
+                        return;
+                    })
+                }
+            })
+        }
+
+    })
+}
+
+// finally 不管成功还是失败，都会继续执行，并且可以执行then
+Promise.finally = function(callback){
+    return 
+}
