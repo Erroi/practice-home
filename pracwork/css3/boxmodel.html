@@ -102,6 +102,57 @@
 		}
 
 
+		.container{
+			display: flex;
+			flex-flow: row nowrap;
+			width: 100vw;
+			height: 100vh;
+			border: 1px solid red;
+		}
+		.container .left, .container .right{
+			width: 300px;
+			border: 1px solid red;
+		}
+		.container .main{
+			flex: 1;
+			border: 1px solid red;
+		}
+
+		.box7{
+			width: 100vw;
+			height: 100vh;
+			border: 1px solid red;
+			position: relative;
+		}
+		.left7{
+			width: 300px;
+			height: 100%;
+			position: absolute;
+			top:0;
+			left: 0;
+		}
+		.right7{
+			width: 300px;
+			height: 100%;
+			position: absolute;
+			top:0;
+			right:0;
+		}
+		.main7{
+			margin-left: 300px;
+			margin-right: 300px;
+			height:100%;
+			border: 1px solid black;
+		}
+
+		.box8 li:nth-child(3) ~ li{
+			color: red;
+		}
+
+		.box9 li:nth-child(2n + 3) {
+			color:blueviolet;
+		}
+
 	</style>
 </head>
 <body>
@@ -140,6 +191,38 @@
 			<h1>fjslljflsfjlsdf</h1>
 			<p>jslfjslflsjfdsfkd</p>
 		</div>
+	</div>
+	<div class="container">
+		<div class="left"></div>
+		<div class="main"></div>
+		<div class="right"></div>
+	</div>
+	<div class="box7">
+		<div class="left7"></div>
+		<div class="main7"></div>
+		<div class="right7"></div>
+	</div>
+	<div class="box8">
+		<li>this is a list</li>
+		<li>this is a list</li>
+		<li>this is a list</li>
+		<li>this is a list</li>
+		<li>this is a list</li>
+		<li>this is a list</li>
+		<li>this is a list</li>
+		<li>this is a list</li>
+		<li>this is a list</li>
+	</div>
+	<div class="box9">
+		<li>this is a box9 list</li>
+		<li>this is a box9 list</li>
+		<li>this is a box9 list</li>
+		<li>this is a box9 list</li>
+		<li>this is a box9 list</li>
+		<li>this is a box9 list</li>
+		<li>this is a box9 list</li>
+		<li>this is a box9 list</li>
+		<li>this is a box9 list</li>
 	</div>
 </body>
 </html>

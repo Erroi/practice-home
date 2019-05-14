@@ -746,3 +746,74 @@ function FriendStatus(props) {
 useEffect(() => {
   document.title = `You clicked ${count} times`;
 }, [count]); // 仅在 count 更改时更新
+
+
+/**
+ * propTypes类型检查
+ *  */
+MyComponent.propTypes = {
+  optionalArray: PropTypes.array,
+  optionalObject: PropTypes.object,
+  optionalFunc: PropTypes.func,
+  optionalString: PropTypes.string,
+  optionalBool: PropTypes.bool,
+  optionalSymbol: PropTypes.symbol,
+
+  optionalNode: PropTypes.node,
+  optionalElement: PropTypes.element,
+  optionalValue: PropTypes.oneOf(['age','name']),
+  optionObject: PropTypes.oneOfType([propTypes.string, propTypes.number]),
+  optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
+  optionObjectOf: PropTypes.objectOf(PropTypes.number),
+  optionObjectWithShape: PropTypes.shape({
+    color: PropTypes.string,
+    fontSize: PropTypes.number
+  })
+}
+
+
+/**
+ * PureComponent的浅比较
+ */
+// 1.先判断是否是继承自pureComponent
+if(ctor.propType && ctor.propType.isPureComponent){
+  return !shallowEqual(oldProp, newProp) || !shallowEqual(oldState, newState)
+}
+function shallowEqual(objA, objB){
+  //通过is函数对两个参数进行比较，判断是否相同，相同直接返回true：基本数据类型值相同，同一个引用对象都表示相同
+  if(is(objA, objB)){
+    return true
+  }
+
+  //如果两个参数不相同，判断两个参数是否至少有一个不是引用类型，存在即返回false，如果两个都是引用类型对象，则继续下面的比较
+  if(typeof objA !== 'object' || typeof objB !== 'object' || objA === null || objB === null){
+    return false
+  }
+
+  const keysA = Object.keys(objA)
+  const keysB = Object.keys(objB)
+
+  if(keysA.length !== keysB.length){
+    return false
+  }
+
+  for(let i = 0; i < keysA.length; i++){
+    if(!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysB[i]])){
+      return false
+    }
+  }
+  return true
+}
+// is函数是自己实现的一个Object.is的功能，排除了===两种不符合预期的情况 NaN === NaN; -0 !== +0
+function is(x, y) {
+  // SameValue algorithm
+  if (x === y) {
+    // Steps 1-5, 7-10
+    // Steps 6.b-6.e: +0 != -0
+    // Added the nonzero y check to make Flow happy, but it is redundant,排除 +0 === -0的情况
+    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+  } else {
+    // Step 6.a: NaN == NaN,x和y都不是NaN
+    return x !== x && y !== y;
+  }
+}
