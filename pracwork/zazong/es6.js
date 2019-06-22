@@ -416,6 +416,13 @@ function f(x, y, z) {
   let args = [0, 1, 2];
   f(...args);
 
+let obj2 = {
+	p: [
+	'Hello',
+	{ y: 'World' }
+	]
+};
+let {p: [x, {y}]} = obj2;
 
   /**
    * Array.from(类数组对象) 转化为真正的数组
